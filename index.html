@@ -6,20 +6,32 @@
     <title>AutoCord Pro - Discord Bot Manager | 1000 Robux</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --roblox-red: #ff4655;
+            --robux-gold: #ffcc00;
+            --discord-blurple: #5865F2;
+            --dark-bg: #0d0f1a;
+            --card-bg: #1a1b2e;
+            --text-light: #ffffff;
+            --text-gray: #b9bbbe;
+            --border-color: #2f3136;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0d0f1a 0%, #1a1b2e 100%);
-            color: white;
+            background: var(--dark-bg);
+            color: var(--text-light);
             min-height: 100vh;
             background-image: 
-                radial-gradient(circle at 20% 80%, rgba(88, 101, 242, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(255, 70, 85, 0.1) 0%, transparent 40%);
+                radial-gradient(circle at 10% 90%, rgba(255, 70, 85, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 10%, rgba(88, 101, 242, 0.08) 0%, transparent 50%);
+            line-height: 1.6;
         }
 
         .container {
@@ -33,8 +45,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 2px solid rgba(255, 70, 85, 0.3);
+            padding: 25px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
         }
 
         .logo {
@@ -44,262 +57,479 @@
         }
 
         .logo-icon {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #ff4655, #5865F2);
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--roblox-red), var(--discord-blurple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255, 70, 85, 0.3));
         }
 
         .logo-text {
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #ff4655, #5865F2);
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--roblox-red), var(--discord-blurple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         /* Hero Section */
         .hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin: 60px 0;
+            gap: 60px;
+            margin: 60px 0 80px;
             align-items: center;
         }
 
         .hero-content h1 {
-            font-size: 3.2rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            font-weight: 800;
         }
 
         .highlight {
-            background: linear-gradient(135deg, #ff4655, #ffcc00);
+            background: linear-gradient(135deg, var(--roblox-red), var(--robux-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 800;
+            position: relative;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--roblox-red), var(--robux-gold));
+            border-radius: 2px;
         }
 
         .tagline {
             font-size: 1.3rem;
-            color: #b9bbbe;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            line-height: 1.7;
+            max-width: 600px;
         }
 
         /* Robux Price Card */
         .robux-card {
-            background: rgba(255, 70, 85, 0.1);
-            border: 3px solid #ff4655;
-            border-radius: 20px;
-            padding: 30px;
+            background: linear-gradient(145deg, rgba(30, 31, 41, 0.9), rgba(20, 21, 31, 0.9));
+            border: 2px solid var(--roblox-red);
+            border-radius: 24px;
+            padding: 40px;
             text-align: center;
             backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(255, 70, 85, 0.2);
-            margin: 30px 0;
-        }
-
-        .robux-amount {
-            font-size: 4.5rem;
-            font-weight: 900;
-            color: #ffcc00;
-            text-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .robux-icon {
-            height: 60px;
-            filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
-        }
-
-        .robux-note {
-            color: #ffcc00;
-            font-size: 1.1rem;
-            margin-top: 10px;
-        }
-
-        /* Buy Button */
-        .buy-button {
-            display: block;
-            background: linear-gradient(135deg, #ff4655 0%, #8b0000 100%);
-            color: white;
-            padding: 22px 40px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 15px;
-            text-align: center;
-            margin: 25px 0;
-            transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(255, 70, 85, 0.3);
+            box-shadow: 
+                0 20px 40px rgba(255, 70, 85, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            margin: 40px 0;
             position: relative;
             overflow: hidden;
         }
 
-        .buy-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 70, 85, 0.4);
+        .robux-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--roblox-red), var(--robux-gold));
         }
 
-        .buy-button:before {
+        .robux-amount {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--robux-gold);
+            text-shadow: 0 0 30px rgba(255, 204, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .robux-icon {
+            height: 70px;
+            filter: drop-shadow(0 0 15px rgba(255, 204, 0, 0.5));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .robux-note {
+            color: var(--robux-gold);
+            font-size: 1.2rem;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+
+        /* Buy Button */
+        .buy-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--roblox-red), #d93a4a);
+            color: var(--text-light);
+            padding: 24px 48px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 16px;
+            margin: 30px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            box-shadow: 
+                0 15px 35px rgba(255, 70, 85, 0.25),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            min-width: 300px;
+        }
+
+        .buy-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transition: 0.5s;
         }
 
-        .buy-button:hover:before {
+        .buy-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 25px 50px rgba(255, 70, 85, 0.35),
+                0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .buy-button:hover::before {
             left: 100%;
+        }
+
+        .buy-button:active {
+            transform: translateY(-2px) scale(1.01);
         }
 
         /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 50px 0;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
         }
 
         .feature-card {
-            background: rgba(30, 31, 41, 0.7);
-            border: 2px solid rgba(88, 101, 242, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            transition: transform 0.3s;
+            background: linear-gradient(145deg, rgba(40, 41, 54, 0.8), rgba(30, 31, 41, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 70, 85, 0.05), rgba(88, 101, 242, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: #5865F2;
+            transform: translateY(-8px);
+            border-color: rgba(255, 70, 85, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
         }
 
         .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #5865F2, #ff4655);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--discord-blurple), var(--roblox-red));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
         /* Steps */
         .steps-container {
-            display: flex;
-            justify-content: space-between;
-            margin: 50px 0;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 60px 0;
         }
 
         .step {
-            flex: 1;
+            background: rgba(30, 31, 41, 0.7);
+            border: 1px solid rgba(255, 70, 85, 0.2);
+            border-radius: 18px;
+            padding: 30px;
             text-align: center;
-            padding: 25px;
-            background: rgba(255, 70, 85, 0.05);
-            border-radius: 15px;
-            border: 2px solid rgba(255, 70, 85, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            border-color: var(--roblox-red);
         }
 
         .step-number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff4655, #ffcc00);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--roblox-red), var(--robux-gold));
             border-radius: 50%;
-            line-height: 40px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(255, 70, 85, 0.3);
         }
 
         /* Discord Section */
         .discord-section {
-            background: linear-gradient(135deg, rgba(88, 101, 242, 0.1), rgba(114, 137, 218, 0.1));
-            border: 2px solid #5865F2;
-            border-radius: 20px;
-            padding: 40px;
-            margin: 50px 0;
+            background: linear-gradient(145deg, rgba(88, 101, 242, 0.1), rgba(114, 137, 218, 0.05));
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            border-radius: 24px;
+            padding: 50px;
+            margin: 80px 0;
             text-align: center;
+            backdrop-filter: blur(10px);
         }
 
         .discord-button {
-            display: inline-block;
-            background: #5865F2;
-            color: white;
-            padding: 15px 35px;
-            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--discord-blurple);
+            color: var(--text-light);
+            padding: 18px 40px;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
+            font-weight: 700;
+            margin-top: 25px;
             transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .discord-button:hover {
             background: #4752c4;
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(88, 101, 242, 0.3);
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 40px 0;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #72767d;
+            padding: 50px 0 30px;
+            margin-top: 80px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-gray);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .footer-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--text-light);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 40px;
             }
             
             .hero-content h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+            }
+            
+            .robux-amount {
+                font-size: 4rem;
+            }
+            
+            .robux-icon {
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.3rem;
             }
             
             .robux-amount {
                 font-size: 3.5rem;
+                flex-direction: column;
+                gap: 10px;
             }
             
-            .steps-container {
-                flex-direction: column;
+            .buy-button {
+                min-width: auto;
+                width: 100%;
+                padding: 20px;
+                font-size: 1.6rem;
             }
             
             .features-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .discord-section {
+                padding: 30px 20px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Utility Classes */
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--roblox-red), var(--discord-blurple));
+            border-radius: 2px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--roblox-red), var(--robux-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--roblox-red), var(--discord-blurple));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #e03a48, #4752c4);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
-        <div class="header">
+        <header class="header">
             <div class="logo">
                 <div class="logo-icon">🤖</div>
                 <div class="logo-text">AutoCord Pro</div>
             </div>
-            <div style="display: flex; gap: 20px;">
-                <a href="#features" style="color: white; text-decoration: none;">Features</a>
-                <a href="#how-to" style="color: white; text-decoration: none;">How to Buy</a>
-                <a href="#support" style="color: white; text-decoration: none;">Support</a>
-            </div>
-        </div>
+            <nav class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-to" class="nav-link">How to Buy</a>
+                <a href="#support" class="nav-link">Support</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+            </nav>
+        </header>
 
         <!-- Hero Section -->
-        <div class="hero">
+        <section class="hero">
             <div class="hero-content">
-                <h1>Ultimate Discord <span class="highlight">Automation</span> for Roblox Players</h1>
+                <h1>Advanced Discord Automation <span class="highlight">for Roblox</span></h1>
                 <p class="tagline">
-                    Level up your Discord server with powerful auto-messaging, smart cleanup, 
-                    and complete control. Designed specifically for the Roblox community.
+                    Professional-grade Discord bot manager with auto-messaging, smart cleanup, 
+                    and complete server control. Built specifically for Roblox community leaders.
                 </p>
                 
                 <!-- Robux Price -->
@@ -310,222 +540,319 @@
                              alt="Robux">
                         1,000
                     </div>
-                    <p class="robux-note">One-time payment • Lifetime access • Free updates</p>
+                    <p class="robux-note">One-Time Payment • Lifetime Access • Free Updates</p>
                 </div>
 
                 <!-- Buy Button -->
-                <a href="https://www.roblox.com/games/YOUR-GAME-ID/gamepass/YOUR-GAMEPASS-ID" 
-                   class="buy-button" 
-                   target="_blank">
-                    <i class="fas fa-gamepad"></i> BUY WITH ROBUX NOW
-                </a>
-
-                <p style="color: #b9bbbe; font-size: 0.9rem;">
-                    <i class="fas fa-shield-alt"></i> Secure purchase via Roblox • Instant delivery
-                </p>
+                <div style="text-align: center;">
+                    <a href="https://www.roblox.com/games/YOUR-GAME-ID/gamepass/YOUR-GAMEPASS-ID" 
+                       class="buy-button" 
+                       target="_blank">
+                        <i class="fas fa-gamepad"></i>
+                        BUY WITH ROBUX
+                    </a>
+                    <p style="color: var(--text-gray); margin-top: 20px; font-size: 0.95rem;">
+                        <i class="fas fa-shield-alt"></i> Secure Roblox Transaction • Instant Delivery • 30-Day Support
+                    </p>
+                </div>
             </div>
 
-            <div class="hero-image" style="text-align: center;">
-                <div style="position: relative; display: inline-block;">
-                    <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=500&auto=format&fit=crop&q=60" 
-                         alt="Discord and Roblox Integration"
-                         style="width: 100%; border-radius: 20px; border: 3px solid #5865F2;">
-                    <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 15px; border-radius: 10px;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ff4655, #ffcc00); border-radius: 50%;"></div>
-                            <div>
-                                <div style="font-weight: bold;">Roblox x Discord</div>
-                                <div style="font-size: 0.9rem; color: #b9bbbe;">Seamless integration</div>
+            <div class="hero-image">
+                <div style="position: relative;">
+                    <div style="background: linear-gradient(145deg, rgba(40, 41, 54, 0.8), rgba(30, 31, 41, 0.8)); 
+                                border-radius: 24px; 
+                                padding: 30px; 
+                                border: 1px solid rgba(255, 70, 85, 0.2);
+                                height: 100%;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;">
+                        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px;">
+                            <div style="width: 60px; height: 60px; 
+                                      background: linear-gradient(135deg, var(--roblox-red), var(--robux-gold)); 
+                                      border-radius: 16px; 
+                                      display: flex; 
+                                      align-items: center; 
+                                      justify-content: center;
+                                      font-size: 1.8rem;">
+                                🤖
                             </div>
+                            <div>
+                                <h3 style="font-size: 1.5rem; margin-bottom: 5px;">Roblox x Discord</h3>
+                                <p style="color: var(--text-gray);">Seamless Integration</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                            <div style="background: rgba(255, 255, 255, 0.03); padding: 15px; border-radius: 12px;">
+                                <div style="color: var(--robux-gold); font-size: 1.8rem; font-weight: bold;">1K</div>
+                                <div style="color: var(--text-gray); font-size: 0.9rem;">Robux Value</div>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.03); padding: 15px; border-radius: 12px;">
+                                <div style="color: var(--discord-blurple); font-size: 1.8rem; font-weight: bold;">24/7</div>
+                                <div style="color: var(--text-gray); font-size: 0.9rem;">Support</div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(255, 70, 85, 0.1); padding: 20px; border-radius: 16px; border: 1px solid rgba(255, 70, 85, 0.2);">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <div style="width: 12px; height: 12px; background: var(--roblox-red); border-radius: 50%;"></div>
+                                <span style="font-weight: 600;">Trusted by Roblox Community Leaders</span>
+                            </div>
+                            <p style="color: var(--text-gray); font-size: 0.95rem;">
+                                Used by top Roblox group owners, game developers, and community managers.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Features -->
-        <div id="features">
-            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px;">
-                <i class="fas fa-bolt"></i> Powerful Features
-            </h2>
+        <!-- Features Section -->
+        <section id="features">
+            <h2 class="section-title">Powerful Features</h2>
             
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-robot"></i></div>
                     <h3>Auto Messaging</h3>
-                    <p>Schedule messages every 5-300 seconds. Perfect for announcements, reminders, or auto-replies.</p>
+                    <p>Schedule automated messages with precise timing control. Perfect for announcements, reminders, or engagement messages.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-broom"></i></div>
                     <h3>Smart Cleanup</h3>
-                    <p>Auto-delete messages on schedule. Keep your channels clean without manual work.</p>
+                    <p>Automatically clean channels based on custom rules. Keep your Discord organized without manual moderation.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-sliders-h"></i></div>
-                    <h3>Drag & Drop UI</h3>
-                    <p>Beautiful floating control panel. Drag it anywhere, minimize when not needed.</p>
+                    <h3>Advanced Controls</h3>
+                    <p>Drag-and-drop interface with real-time statistics. Full control over every aspect of your automation.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
                     <h3>Roblox Optimized</h3>
-                    <p>Built specifically for Roblox community servers. Works perfectly with Roblox Discord communities.</p>
+                    <p>Specifically designed for Roblox community workflows. Integrates perfectly with Roblox group structures.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-bolt"></i></div>
                     <h3>Lightning Fast</h3>
-                    <p>No lag, no delay. Runs smoothly even in large servers with thousands of members.</p>
+                    <p>Zero-lag performance even in massive servers. Optimized for speed and reliability.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon"><i class="fas fa-life-ring"></i></div>
-                    <h3>24/7 Support</h3>
-                    <p>Get help anytime in our Discord. Our team and community will assist you.</p>
+                    <h3>Premium Support</h3>
+                    <p>24/7 Discord support with average response time under 30 minutes. We're here to help you succeed.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- How to Buy -->
-        <div id="how-to" style="margin: 80px 0;">
-            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px;">
-                <i class="fas fa-shopping-cart"></i> How to Buy
-            </h2>
+        <section id="how-to">
+            <h2 class="section-title">How to Buy</h2>
             
             <div class="steps-container">
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Click Buy Button</h3>
-                    <p>Click the BUY WITH ROBUX button above. You'll be taken to Roblox.</p>
+                    <p style="color: var(--text-gray); margin-top: 10px;">Click the BUY WITH ROBUX button above to visit Roblox.</p>
                 </div>
                 
                 <div class="step">
                     <div class="step-number">2</div>
                     <h3>Purchase Game Pass</h3>
-                    <p>Buy the "AutoCord Pro" Game Pass for 1,000 Robux on Roblox.</p>
+                    <p style="color: var(--text-gray); margin-top: 10px;">Buy the "AutoCord Pro" Game Pass for 1,000 Robux.</p>
                 </div>
                 
                 <div class="step">
                     <div class="step-number">3</div>
                     <h3>Join Discord</h3>
-                    <p>Join our Discord server using the button below.</p>
+                    <p style="color: var(--text-gray); margin-top: 10px;">Join our Discord server using the button below.</p>
                 </div>
                 
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Get Download</h3>
-                    <p>DM @AutoCordBot your Roblox username to receive instant download.</p>
+                    <h3>Get Instant Access</h3>
+                    <p style="color: var(--text-gray); margin-top: 10px;">DM our verification bot to receive your download instantly.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Discord Section -->
-        <div id="support" class="discord-section">
-            <h2 style="font-size: 2.2rem; margin-bottom: 20px;">
-                <i class="fab fa-discord"></i> Join Our Discord
+        <section id="support" class="discord-section">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 800;">
+                <i class="fab fa-discord" style="color: var(--discord-blurple);"></i> 
+                Join Our Community
             </h2>
-            <p style="color: #b9bbbe; max-width: 600px; margin: 0 auto 25px;">
-                Get instant support, download instructions, updates, and connect with other AutoCord users.
-                Our community will help you get started!
+            <p style="color: var(--text-gray); max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem;">
+                Get instant support, download instructions, regular updates, and connect with thousands of 
+                other AutoCord users. Our community will help you maximize your Discord automation.
             </p>
             <a href="https://discord.gg/YOUR-INVITE" class="discord-button" target="_blank">
                 <i class="fab fa-discord"></i> JOIN DISCORD SERVER
             </a>
-        </div>
+        </section>
 
-        <!-- Final Call to Action -->
-        <div style="text-align: center; margin: 60px 0;">
-            <div class="robux-card" style="max-width: 600px; margin: 0 auto;">
-                <div class="robux-amount" style="font-size: 3.5rem;">
+        <!-- Final CTA -->
+        <section id="pricing" style="text-align: center; margin: 80px 0;">
+            <div class="robux-card" style="max-width: 700px; margin: 0 auto;">
+                <h2 style="font-size: 2.2rem; margin-bottom: 20px; font-weight: 800;">Ready to Automate Your Discord?</h2>
+                <p style="color: var(--text-gray); margin-bottom: 30px; font-size: 1.1rem;">
+                    Join thousands of Roblox community leaders who trust AutoCord for their Discord automation needs.
+                </p>
+                
+                <div class="robux-amount" style="font-size: 4rem;">
                     <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/roblox_logo_icon_168309.png" 
                          class="robux-icon" 
-                         style="height: 50px;" 
+                         style="height: 60px;" 
                          alt="Robux">
                     1,000 Robux
                 </div>
-                <p style="margin: 20px 0; font-size: 1.1rem;">Complete Discord automation for your Roblox community</p>
+                
                 <a href="https://www.roblox.com/games/YOUR-GAME-ID/gamepass/YOUR-GAMEPASS-ID" 
                    class="buy-button" 
-                   style="font-size: 1.5rem; padding: 18px 30px;"
+                   style="font-size: 1.6rem; padding: 22px 40px; margin: 30px auto;"
                    target="_blank">
-                    <i class="fas fa-rocket"></i> GET AUTOCOURD NOW
+                    <i class="fas fa-rocket"></i>
+                    GET AUTOCOURD PRO NOW
                 </a>
+                
+                <p style="color: var(--text-gray); font-size: 0.95rem;">
+                    <i class="fas fa-clock"></i> Instant delivery • 
+                    <i class="fas fa-sync-alt"></i> Lifetime updates • 
+                    <i class="fas fa-headset"></i> Premium support
+                </p>
             </div>
-        </div>
+        </section>
 
         <!-- Footer -->
-        <div class="footer">
-            <p>© 2024 AutoCord Pro. All rights reserved.</p>
-            <p style="margin-top: 20px;">
-                Not affiliated with Roblox Corporation or Discord Inc.
-                <br>
-                <a href="#" style="color: #7289da; margin: 0 10px;">Terms of Service</a> • 
-                <a href="#" style="color: #7289da; margin: 0 10px;">Privacy Policy</a> • 
-                <a href="#" style="color: #7289da; margin: 0 10px;">Support</a>
-            </p>
-            <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
-                <i class="fas fa-exclamation-triangle"></i> This product is for legitimate Discord server management only.
-            </p>
-        </div>
+        <footer class="footer">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="logo" style="justify-content: center; margin-bottom: 30px;">
+                    <div class="logo-icon">🤖</div>
+                    <div class="logo-text">AutoCord Pro</div>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Support</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">Refund Policy</a>
+                </div>
+                
+                <p style="margin: 30px 0; color: var(--text-gray); font-size: 0.95rem;">
+                    © 2024 AutoCord Pro. All rights reserved.<br>
+                    Not affiliated with Roblox Corporation or Discord Inc.
+                </p>
+                
+                <p style="color: #666; font-size: 0.85rem; line-height: 1.6;">
+                    <i class="fas fa-exclamation-circle"></i> 
+                    AutoCord is designed for legitimate Discord server management and automation. 
+                    Users are responsible for complying with Discord's Terms of Service and community guidelines.
+                </p>
+            </div>
+        </footer>
     </div>
 
     <script>
-        // Simple animations
-        document.querySelectorAll('.buy-button').forEach(button => {
-            button.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-            
-            button.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-            
-            // Click tracking
-            button.addEventListener('click', function() {
-                console.log('Purchase button clicked');
-                // Add analytics here
-            });
-        });
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
+        // Enhanced animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Button hover effects
+            const buttons = document.querySelectorAll('.buy-button, .discord-button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
                 
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+                
+                // Click tracking
+                button.addEventListener('click', function() {
+                    console.log('Button clicked:', this.textContent.trim());
+                    // Add your analytics here
+                });
             });
-        });
 
-        // Add floating Robux animation
-        function createFloatingRobux() {
-            if(document.documentElement.clientWidth > 768) {
+            // Smooth scroll for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe feature cards and steps
+            document.querySelectorAll('.feature-card, .step').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Create floating Robux effect
+            function createFloatingRobux() {
                 const robux = document.createElement('div');
                 robux.innerHTML = '₱';
                 robux.style.position = 'fixed';
-                robux.style.fontSize = '24px';
-                robux.style.color = '#ffcc00';
-                robux.style.opacity = '0.7';
+                robux.style.fontSize = `${20 + Math.random() * 20}px`;
+                robux.style.color = 'rgba(255, 204, 0, 0.6)';
+                robux.style.opacity = '0';
                 robux.style.pointerEvents = 'none';
                 robux.style.zIndex = '-1';
                 robux.style.left = Math.random() * 100 + 'vw';
                 robux.style.top = '-50px';
                 document.body.appendChild(robux);
 
+                // Fade in
+                setTimeout(() => {
+                    robux.style.opacity = '0.6';
+                    robux.style.transition = 'opacity 0.5s';
+                }, 100);
+
                 // Animation
-                const duration = 3 + Math.random() * 4;
+                const duration = 4 + Math.random() * 5;
+                const endY = window.innerHeight + 100;
+                
                 const animation = robux.animate([
-                    { transform: 'translateY(0) rotate(0deg)', opacity: 0.7 },
-                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${360 + Math.random() * 360}deg)`, opacity: 0 }
+                    { 
+                        transform: 'translateY(0) rotate(0deg) scale(1)', 
+                        opacity: 0.6 
+                    },
+                    { 
+                        transform: `translateY(${endY}px) rotate(${360 + Math.random() * 360}deg) scale(${0.5 + Math.random() * 0.5})`, 
+                        opacity: 0 
+                    }
                 ], {
                     duration: duration * 1000,
                     easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
@@ -533,11 +860,24 @@
 
                 animation.onfinish = () => robux.remove();
             }
-        }
 
-        // Create floating Robux every 2-4 seconds
-        setInterval(createFloatingRobux, 2000);
-        createFloatingRobux(); // Initial one
+            // Create floating Robux periodically
+            let robuxInterval = setInterval(createFloatingRobux, 1500);
+            
+            // Create initial Robux
+            for(let i = 0; i < 5; i++) {
+                setTimeout(createFloatingRobux, i * 300);
+            }
+
+            // Stop animation when page is not visible
+            document.addEventListener('visibilitychange', function() {
+                if(document.hidden) {
+                    clearInterval(robuxInterval);
+                } else {
+                    robuxInterval = setInterval(createFloatingRobux, 1500);
+                }
+            });
+        });
     </script>
 </body>
 </html>
