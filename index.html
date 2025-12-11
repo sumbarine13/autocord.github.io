@@ -143,8 +143,8 @@
     .price-card{
       margin-top:20px;
       display:inline-grid;grid-auto-flow:row;gap:8px;padding:18px;border-radius:12px;
-      align-items:center;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.06);
+      align-items:center;background:linear-gradient(180deg, rgba(255,204,0,0.06), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,204,0,0.06);
     }
     .price-big{display:flex;align-items:center;gap:12px;font-weight:900;font-size:34px;color:var(--accent-3)}
     .price-note{font-size:13px;color:var(--muted)}
@@ -236,7 +236,7 @@
         <h2 id="hero-heading" class="hero-title">Automate Discord — built for <span style="background:linear-gradient(90deg,var(--accent-2),var(--accent-1));-webkit-background-clip:text;color:transparent">Roblox</span></h2>
         <p class="hero-sub">AutoCord Pro gives you scheduled messaging, auto-cleanup, moderation workflows, and one-click integration with Roblox groups — all with super-low latency and robust safety controls.</p>
 
-        <!-- BUY + Demo + Already Purchased -->
+        <!-- BUY and Demo buttons -->
         <div class="cta-row">
           <a href="https://www.roblox.com/games/YOUR-GAME-ID/gamepass/YOUR-GAMEPASS-ID" class="btn btn-primary" target="_blank" rel="noopener" aria-label="Buy with Robux">
             <img src="https://cdn-icons-png.flaticon.com/512/5968/5968332.png" alt="Robux" style="height:20px;"> BUY — 1,000 Robux
@@ -245,18 +245,24 @@
           <button class="btn btn-ghost" id="demoBtn" aria-haspopup="dialog" aria-controls="demoModal">
             <i class="fas fa-play-circle"></i> Live Demo
           </button>
-
-          <button class="btn btn-ghost" id="alreadyPurchasedBtn">
-            <i class="fas fa-ticket-alt"></i> Already Purchased?
-          </button>
         </div>
 
+        <!-- Price Card -->
         <div class="price-card" aria-hidden>
           <div class="price-big">
             <img src="https://cdn-icons-png.flaticon.com/512/5968/5968332.png" alt="Robux" style="height:30px;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45))">
             1,000
           </div>
           <div class="price-note">One-time • Lifetime access • Free updates</div>
+        </div>
+
+        <!-- Already Purchased Card -->
+        <div id="alreadyPurchasedCard" style="margin-top:20px;max-width:380px;padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(88,101,242,0.05), rgba(255,70,85,0.05));border:1px solid rgba(255,255,255,0.05);text-align:center;">
+          <h4 style="margin:0 0 10px;font-size:16px;color:#fff;">Already Purchased?</h4>
+          <p style="font-size:13px;color:#b9bbbe;margin:0 0 12px;">
+            Join our Discord server and create a support ticket with your Roblox username. Our team will verify your purchase and respond shortly.
+          </p>
+          <a href="https://discord.gg/5aZKV8eE5R" target="_blank" class="btn btn-primary" style="font-size:14px;">Join Discord</a>
         </div>
       </div>
 
@@ -287,6 +293,7 @@
       </aside>
     </section>
 
+    <!-- Features Section -->
     <section id="features" class="section" aria-labelledby="features-heading">
       <h3 id="features-heading" style="margin:0;font-size:18px">Powerful features</h3>
 
@@ -296,40 +303,19 @@
           <h3>Auto Messaging</h3>
           <p>Precise scheduling, recurrence patterns, dynamic variables and templates for announcements and reminders.</p>
         </div>
-
         <div class="feature reveal">
           <div class="icon"><i class="fas fa-broom"></i></div>
           <h3>Smart Cleanup</h3>
           <p>Auto purge spam, archive old threads, and maintain channel hygiene with rule-based triggers.</p>
         </div>
-
         <div class="feature reveal">
           <div class="icon"><i class="fas fa-shield-alt"></i></div>
           <h3>Access Controls</h3>
           <p>Role-based automation and granular permissions to keep moderation safe and auditable.</p>
         </div>
-
         <div class="feature reveal">
           <div class="icon"><i class="fas fa-sliders-h"></i></div>
           <h3>Live Dashboard</h3>
           <p>Drag-and-drop rule builder with realtime stats and logs — control flows visually.</p>
         </div>
-
-        <div class="feature reveal">
-          <div class="icon"><i class="fas fa-bolt"></i></div>
-          <h3>Lightning Fast</h3>
-          <p>Optimized for scale so actions execute without delays even in large servers.</p>
-        </div>
-
-        <div class="feature reveal">
-          <div class="icon"><i class="fas fa-life-ring"></i></div>
-          <h3>Premium Support</h3>
-          <p>Dedicated Discord support and convenient setup guides — we help you migrate fast.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="cta-banner reveal" style="margin-top:18px" id="pricing">
-      <div class="left">
-        <h3 style="margin:0">Ready to automate your Discord?</h3>
-        <p style="margin:6px 0 0">One
+        <div class="feature reveal
