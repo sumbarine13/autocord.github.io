@@ -1,169 +1,543 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AutoCord - Discord Bot Manager | Buy with Robux</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoCord Pro - Discord Bot Manager | 1000 Robux</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: #0d0f1a;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d0f1a 0%, #1a1b2e 100%);
             color: white;
-            text-align: center;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(88, 101, 242, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(255, 70, 85, 0.1) 0%, transparent 40%);
         }
+
         .container {
-            max-width: 700px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px;
         }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(255, 70, 85, 0.3);
+        }
+
         .logo {
-            font-size: 80px;
-            margin: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        .robux-price {
+
+        .logo-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ff4655, #5865F2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff4655, #5865F2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin: 60px 0;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ff4655, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #b9bbbe;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Robux Price Card */
+        .robux-card {
             background: rgba(255, 70, 85, 0.1);
-            border: 2px solid #ff4655;
-            border-radius: 15px;
-            padding: 15px;
-            margin: 25px 0;
-            font-size: 28px;
-            display: inline-block;
+            border: 3px solid #ff4655;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(255, 70, 85, 0.2);
+            margin: 30px 0;
         }
+
+        .robux-amount {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #ffcc00;
+            text-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
         .robux-icon {
-            height: 32px;
-            vertical-align: middle;
-            margin-right: 10px;
+            height: 60px;
+            filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.5));
         }
+
+        .robux-note {
+            color: #ffcc00;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Buy Button */
         .buy-button {
             display: block;
             background: linear-gradient(135deg, #ff4655 0%, #8b0000 100%);
             color: white;
-            padding: 20px;
-            font-size: 24px;
+            padding: 22px 40px;
+            font-size: 1.8rem;
             font-weight: bold;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 15px;
+            text-align: center;
             margin: 25px 0;
             transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(255, 70, 85, 0.3);
+            position: relative;
+            overflow: hidden;
         }
+
         .buy-button:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 25px rgba(255, 70, 85, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 70, 85, 0.4);
         }
-        .steps {
-            text-align: left;
-            background: #1e1f29;
+
+        .buy-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .buy-button:hover:before {
+            left: 100%;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: rgba(30, 31, 41, 0.7);
+            border: 2px solid rgba(88, 101, 242, 0.3);
+            border-radius: 15px;
             padding: 25px;
-            border-radius: 12px;
-            margin: 30px 0;
+            transition: transform 0.3s;
         }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #5865F2;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #5865F2, #ff4655);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Steps */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 50px 0;
+            gap: 20px;
+        }
+
         .step {
-            padding: 10px 0;
-            margin: 10px 0;
-            border-bottom: 1px solid #2f3136;
+            flex: 1;
+            text-align: center;
+            padding: 25px;
+            background: rgba(255, 70, 85, 0.05);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 70, 85, 0.2);
         }
-        .discord-widget {
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff4655, #ffcc00);
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Discord Section */
+        .discord-section {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.1), rgba(114, 137, 218, 0.1));
+            border: 2px solid #5865F2;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+
+        .discord-button {
+            display: inline-block;
             background: #5865F2;
-            padding: 15px;
+            color: white;
+            padding: 15px 35px;
             border-radius: 10px;
-            margin: 20px 0;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s;
         }
-        .warning {
-            background: rgba(255, 165, 0, 0.1);
-            border: 1px solid orange;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            font-size: 14px;
+
+        .discord-button:hover {
+            background: #4752c4;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #72767d;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .robux-amount {
+                font-size: 3.5rem;
+            }
+            
+            .steps-container {
+                flex-direction: column;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">🤖</div>
-        <h1>AutoCord Pro</h1>
-        <p style="color: #b9bbbe; font-size: 18px;">Discord Bot Manager - Buy with Robux</p>
-        
-        <!-- Robux Price Display -->
-        <div class="robux-price">
-            <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/roblox_logo_icon_168309.png" class="robux-icon" alt="Robux">
-            <strong>299 Robux</strong>
-            <div style="font-size: 16px; color: #ffcc00;">(One-Time Payment)</div>
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">🤖</div>
+                <div class="logo-text">AutoCord Pro</div>
+            </div>
+            <div style="display: flex; gap: 20px;">
+                <a href="#features" style="color: white; text-decoration: none;">Features</a>
+                <a href="#how-to" style="color: white; text-decoration: none;">How to Buy</a>
+                <a href="#support" style="color: white; text-decoration: none;">Support</a>
+            </div>
         </div>
-        
-        <!-- Buy with Robux Button -->
-        <a href="https://www.roblox.com/games/YOUR-GAME-ID" class="buy-button" target="_blank">
-            🎮 BUY WITH ROBUX NOW
-        </a>
-        
-        <!-- Alternative Methods -->
-        <div style="margin: 20px 0;">
-            <p style="color: #b9bbbe;">Other payment methods:</p>
-            <a href="https://gumroad.com/l/autocord" style="color: #00b36b; margin: 0 10px;">$14.99 via Gumroad</a> •
-            <a href="https://paypal.me/yourname" style="color: #009cde; margin: 0 10px;">PayPal</a>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Ultimate Discord <span class="highlight">Automation</span> for Roblox Players</h1>
+                <p class="tagline">
+                    Level up your Discord server with powerful auto-messaging, smart cleanup, 
+                    and complete control. Designed specifically for the Roblox community.
+                </p>
+                
+                <!-- Robux Price -->
+                <div class="robux-card">
+                    <div class="robux-amount">
+                        <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/roblox_logo_icon_168309.png" 
+                             class="robux-icon" 
+                             alt="Robux">
+                        1,000
+                    </div>
+                    <p class="robux-note">One-time payment • Lifetime access • Free updates</p>
+                </div>
+
+                <!-- Buy Button -->
+                <a href="https://www.roblox.com/games/YOUR-GAME-ID/gamepass/YOUR-GAMEPASS-ID" 
+                   class="buy-button" 
+                   target="_blank">
+                    <i class="fas fa-gamepad"></i> BUY WITH ROBUX NOW
+                </a>
+
+                <p style="color: #b9bbbe; font-size: 0.9rem;">
+                    <i class="fas fa-shield-alt"></i> Secure purchase via Roblox • Instant delivery
+                </p>
+            </div>
+
+            <div class="hero-image" style="text-align: center;">
+                <div style="position: relative; display: inline-block;">
+                    <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=500&auto=format&fit=crop&q=60" 
+                         alt="Discord and Roblox Integration"
+                         style="width: 100%; border-radius: 20px; border: 3px solid #5865F2;">
+                    <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 15px; border-radius: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ff4655, #ffcc00); border-radius: 50%;"></div>
+                            <div>
+                                <div style="font-weight: bold;">Roblox x Discord</div>
+                                <div style="font-size: 0.9rem; color: #b9bbbe;">Seamless integration</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <!-- How It Works -->
-        <div class="steps">
-            <h3>🎯 How to Buy with Robux:</h3>
-            <div class="step">1. <strong>Click "BUY WITH ROBUX"</strong> above</div>
-            <div class="step">2. <strong>Purchase the "AutoCord Pro" Game Pass</strong> for 299 Robux</div>
-            <div class="step">3. <strong>Join our Discord</strong> (link below)</div>
-            <div class="step">4. <strong>DM @AutoCordBot</strong> with your Roblox username</div>
-            <div class="step">5. <strong>Receive download instantly</strong> after verification</div>
+
+        <!-- Features -->
+        <div id="features">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px;">
+                <i class="fas fa-bolt"></i> Powerful Features
+            </h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    <h3>Auto Messaging</h3>
+                    <p>Schedule messages every 5-300 seconds. Perfect for announcements, reminders, or auto-replies.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-broom"></i></div>
+                    <h3>Smart Cleanup</h3>
+                    <p>Auto-delete messages on schedule. Keep your channels clean without manual work.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-sliders-h"></i></div>
+                    <h3>Drag & Drop UI</h3>
+                    <p>Beautiful floating control panel. Drag it anywhere, minimize when not needed.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Roblox Optimized</h3>
+                    <p>Built specifically for Roblox community servers. Works perfectly with Roblox Discord communities.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Lightning Fast</h3>
+                    <p>No lag, no delay. Runs smoothly even in large servers with thousands of members.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-life-ring"></i></div>
+                    <h3>24/7 Support</h3>
+                    <p>Get help anytime in our Discord. Our team and community will assist you.</p>
+                </div>
+            </div>
         </div>
-        
-        <!-- Discord Widget -->
-        <div class="discord-widget">
-            <h3>💬 Need Help? Join Discord</h3>
-            <p>Get instant support and download after purchase</p>
-            <a href="https://discord.gg/YOUR-INVITE" 
-               style="display:inline-block;background:white;color:#5865F2;padding:12px 25px;border-radius:8px;text-decoration:none;font-weight:bold;margin:10px;">
-               JOIN DISCORD SERVER
+
+        <!-- How to Buy -->
+        <div id="how-to" style="margin: 80px 0;">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 40px;">
+                <i class="fas fa-shopping-cart"></i> How to Buy
+            </h2>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Click Buy Button</h3>
+                    <p>Click the BUY WITH ROBUX button above. You'll be taken to Roblox.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Purchase Game Pass</h3>
+                    <p>Buy the "AutoCord Pro" Game Pass for 1,000 Robux on Roblox.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Join Discord</h3>
+                    <p>Join our Discord server using the button below.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Get Download</h3>
+                    <p>DM @AutoCordBot your Roblox username to receive instant download.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discord Section -->
+        <div id="support" class="discord-section">
+            <h2 style="font-size: 2.2rem; margin-bottom: 20px;">
+                <i class="fab fa-discord"></i> Join Our Discord
+            </h2>
+            <p style="color: #b9bbbe; max-width: 600px; margin: 0 auto 25px;">
+                Get instant support, download instructions, updates, and connect with other AutoCord users.
+                Our community will help you get started!
+            </p>
+            <a href="https://discord.gg/YOUR-INVITE" class="discord-button" target="_blank">
+                <i class="fab fa-discord"></i> JOIN DISCORD SERVER
             </a>
         </div>
-        
-        <!-- Warning/Note -->
-        <div class="warning">
-            ⚠️ <strong>Important:</strong> Roblox takes 30% fee from Game Pass purchases. 
-            You pay 299 Robux, we receive ~210 Robux after fees.
+
+        <!-- Final Call to Action -->
+        <div style="text-align: center; margin: 60px 0;">
+            <div class="robux-card" style="max-width: 600px; margin: 0 auto;">
+                <div class="robux-amount" style="font-size: 3.5rem;">
+                    <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/roblox_logo_icon_168309.png" 
+                         class="robux-icon" 
+                         style="height: 50px;" 
+                         alt="Robux">
+                    1,000 Robux
+                </div>
+                <p style="margin: 20px 0; font-size: 1.1rem;">Complete Discord automation for your Roblox community</p>
+                <a href="https://www.roblox.com/games/YOUR-GAME-ID/gamepass/YOUR-GAMEPASS-ID" 
+                   class="buy-button" 
+                   style="font-size: 1.5rem; padding: 18px 30px;"
+                   target="_blank">
+                    <i class="fas fa-rocket"></i> GET AUTOCOURD NOW
+                </a>
+            </div>
         </div>
-        
-        <!-- Features -->
-        <div style="text-align: left; margin: 30px 0;">
-            <h3>✨ Features:</h3>
-            <div style="padding: 8px 0;">✅ Auto Message Scheduler (5-300s intervals)</div>
-            <div style="padding: 8px 0;">✅ Smart Cleanup - Auto-delete messages</div>
-            <div style="padding: 8px 0;">✅ Draggable Control Panel with Live Stats</div>
-            <div style="padding: 8px 0;">✅ No Installation - Bookmarklet system</div>
-        </div>
-        
-        <div style="margin-top: 40px; color: #72767d; font-size: 14px;">
-            © 2024 AutoCord • Not affiliated with Roblox or Discord Inc.
-            <br>
-            <a href="#" style="color: #7289da; margin: 0 10px;">Terms</a>
-            <a href="#" style="color: #7289da; margin: 0 10px;">Privacy</a>
-            <a href="https://discord.gg/YOUR-INVITE" style="color: #7289da; margin: 0 10px;">Support</a>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 AutoCord Pro. All rights reserved.</p>
+            <p style="margin-top: 20px;">
+                Not affiliated with Roblox Corporation or Discord Inc.
+                <br>
+                <a href="#" style="color: #7289da; margin: 0 10px;">Terms of Service</a> • 
+                <a href="#" style="color: #7289da; margin: 0 10px;">Privacy Policy</a> • 
+                <a href="#" style="color: #7289da; margin: 0 10px;">Support</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+                <i class="fas fa-exclamation-triangle"></i> This product is for legitimate Discord server management only.
+            </p>
         </div>
     </div>
-    
+
     <script>
-        // Simple animation for buttons
-        document.querySelectorAll('.buy-button').forEach(btn => {
-            btn.addEventListener('mouseover', function() {
-                this.style.transform = 'scale(1.03)';
+        // Simple animations
+        document.querySelectorAll('.buy-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
             });
-            btn.addEventListener('mouseout', function() {
-                this.style.transform = 'scale(1)';
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+            
+            // Click tracking
+            button.addEventListener('click', function() {
+                console.log('Purchase button clicked');
+                // Add analytics here
             });
         });
-        
-        // Track Robux button clicks
-        document.querySelector('.buy-button').addEventListener('click', function() {
-            // You can add analytics here
-            console.log('Robux purchase button clicked');
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
+
+        // Add floating Robux animation
+        function createFloatingRobux() {
+            if(document.documentElement.clientWidth > 768) {
+                const robux = document.createElement('div');
+                robux.innerHTML = '₱';
+                robux.style.position = 'fixed';
+                robux.style.fontSize = '24px';
+                robux.style.color = '#ffcc00';
+                robux.style.opacity = '0.7';
+                robux.style.pointerEvents = 'none';
+                robux.style.zIndex = '-1';
+                robux.style.left = Math.random() * 100 + 'vw';
+                robux.style.top = '-50px';
+                document.body.appendChild(robux);
+
+                // Animation
+                const duration = 3 + Math.random() * 4;
+                const animation = robux.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 0.7 },
+                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${360 + Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                });
+
+                animation.onfinish = () => robux.remove();
+            }
+        }
+
+        // Create floating Robux every 2-4 seconds
+        setInterval(createFloatingRobux, 2000);
+        createFloatingRobux(); // Initial one
     </script>
 </body>
 </html>
