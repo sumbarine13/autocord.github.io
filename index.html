@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoCord - Buy Discord Bot Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: #0f0f23; color: #fff; line-height: 1.6; }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #5865F2 0%, #0d0f1a 100%);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 3px solid #7289da;
+        }
+        .logo { font-size: 2.5rem; margin-bottom: 1rem; }
+        .logo i { color: #43b581; }
+        h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+        .tagline { font-size: 1.2rem; color: #b9bbbe; max-width: 600px; margin: 0 auto; }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        /* Product Info */
+        .product-info { background: #1e1f29; padding: 2rem; border-radius: 15px; border: 1px solid #2f3136; }
+        .price { font-size: 3.5rem; color: #43b581; font-weight: bold; margin: 1rem 0; }
+        .price span { font-size: 1.5rem; color: #b9bbbe; }
+        
+        /* Features List */
+        .features { margin: 2rem 0; }
+        .feature { display: flex; align-items: center; margin-bottom: 1rem; padding: 0.8rem; background: #2f3136; border-radius: 8px; }
+        .feature i { color: #43b581; margin-right: 1rem; font-size: 1.2rem; }
+        
+        /* Payment Box */
+        .payment-box {
+            background: #1e1f29;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #5865F2;
+            position: sticky;
+            top: 20px;
+        }
+        .buy-section { text-align: center; }
+        
+        /* Gumroad Button */
+        .gumroad-button {
+            display: inline-block;
+            background: #00b36b;
+            color: white;
+            padding: 1.2rem 3rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 1.5rem 0;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .gumroad-button:hover {
+            background: #00995c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 179, 107, 0.3);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            grid-column: 1 / -1;
+            margin-top: 3rem;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .testimonial {
+            background: #1e1f29;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #5865F2;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #72767d;
+            border-top: 1px solid #2f3136;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+            .testimonial-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-robot"></i>
+        </div>
+        <h1>AutoCord Pro</h1>
+        <p class="tagline">Advanced Discord Bot Manager with auto-messaging, smart cleanup, and complete server control</p>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Product Information -->
+        <div class="product-info">
+            <h2><i class="fas fa-crown"></i> What You Get</h2>
+            
+            <div class="price">
+                $14.99 <span>one-time payment</span>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Auto Message Scheduler</strong> - Send messages automatically every 5-300 seconds</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Smart Message Cleanup</strong> - Auto-delete messages on a schedule</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Draggable Control Panel</strong> - Beautiful floating UI with real-time stats</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Token Security</strong> - Secure token extraction with copy function</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Channel Auto-Detection</strong> - Automatically detects current channel</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Customizable Settings</strong> - Adjust intervals, messages, and behavior</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Activity Logging</strong> - Real-time logs of all actions</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span><strong>Lifetime Updates</strong> - Free updates forever</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 1rem; background: #2f3136; border-radius: 8px;">
+                <h3><i class="fas fa-download"></i> Instant Delivery</h3>
+                <p>After payment, you'll immediately receive:</p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>The complete JavaScript bookmarklet code</li>
+                    <li>Step-by-step setup guide</li>
+                    <li>Video tutorial</li>
+                    <li>Access to support Discord</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="payment-box">
+            <div class="buy-section">
+                <h2><i class="fas fa-lock"></i> Secure Purchase</h2>
+                <p style="color: #b9bbbe; margin: 1rem 0;">Complete your purchase in 30 seconds</p>
+                
+                <!-- Gumroad Buy Button -->
+                <a href="https://gumroad.com/l/YOUR-PRODUCT-LINK" class="gumroad-button" target="_blank">
+                    <i class="fas fa-bolt"></i> BUY NOW - $14.99
+                </a>
+                
+                <p style="font-size: 0.9rem; color: #72767d;">
+                    <i class="fas fa-shield-alt"></i> 30-Day Money Back Guarantee
+                </p>
+                
+                <div style="margin-top: 2rem; background: #2f3136; padding: 1.5rem; border-radius: 10px;">
+                    <h3><i class="fas fa-credit-card"></i> Payment Methods</h3>
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; font-size: 2rem;">
+                        <i class="fab fa-cc-visa" title="Visa"></i>
+                        <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                        <i class="fab fa-cc-amex" title="American Express"></i>
+                        <i class="fab fa-cc-paypal" title="PayPal"></i>
+                        <i class="fab fa-bitcoin" title="Bitcoin"></i>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 1.5rem; font-size: 0.9rem;">
+                    <p><i class="fas fa-sync"></i> License: 1 Discord account</p>
+                    <p><i class="fas fa-infinity"></i> Updates: Free lifetime updates</p>
+                    <p><i class="fas fa-headset"></i> Support: Priority Discord support</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials">
+            <h2><i class="fas fa-star"></i> What Users Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p>"This bot manager saved me 10+ hours weekly. The auto-cleanup feature is perfect for keeping channels tidy."</p>
+                    <p style="color: #43b581; margin-top: 0.5rem;"><strong>Alex T.</strong> · Server Admin</p>
+                </div>
+                <div class="testimonial">
+                    <p>"Worth every penny. The UI is intuitive and it just works. Customer support helped me set up in minutes."</p>
+                    <p style="color: #43b581; margin-top: 0.5rem;"><strong>Jordan M.</strong> · Community Manager</p>
+                </div>
+                <div class="testimonial">
+                    <p>"I've tried 3 other tools but this is the only one that handles token security properly. Highly recommended!"</p>
+                    <p style="color: #43b581; margin-top: 0.5rem;"><strong>Sam R.</strong> · Bot Developer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 AutoCord. Not affiliated with Discord Inc.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="#" style="color: #7289da; margin: 0 1rem;">Terms</a> · 
+            <a href="#" style="color: #7289da; margin: 0 1rem;">Privacy</a> · 
+            <a href="#" style="color: #7289da; margin: 0 1rem;">Support</a> · 
+            <a href="#" style="color: #7289da; margin: 0 1rem;">Discord</a>
+        </p>
+    </footer>
+
+    <script>
+        // Simple animation for buy button
+        document.querySelector('.gumroad-button').addEventListener('mouseover', function() {
+            this.style.transform = 'translateY(-3px)';
+        });
+        document.querySelector('.gumroad-button').addEventListener('mouseout', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    </script>
+</body>
+</html>
