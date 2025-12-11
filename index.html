@@ -1,1 +1,169 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AutoCord - Discord Bot Manager | Buy with Robux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #0d0f1a;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .logo {
+            font-size: 80px;
+            margin: 20px;
+        }
+        .robux-price {
+            background: rgba(255, 70, 85, 0.1);
+            border: 2px solid #ff4655;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 25px 0;
+            font-size: 28px;
+            display: inline-block;
+        }
+        .robux-icon {
+            height: 32px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .buy-button {
+            display: block;
+            background: linear-gradient(135deg, #ff4655 0%, #8b0000 100%);
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 12px;
+            margin: 25px 0;
+            transition: all 0.3s;
+        }
+        .buy-button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(255, 70, 85, 0.3);
+        }
+        .steps {
+            text-align: left;
+            background: #1e1f29;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        .step {
+            padding: 10px 0;
+            margin: 10px 0;
+            border-bottom: 1px solid #2f3136;
+        }
+        .discord-widget {
+            background: #5865F2;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .warning {
+            background: rgba(255, 165, 0, 0.1);
+            border: 1px solid orange;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🤖</div>
+        <h1>AutoCord Pro</h1>
+        <p style="color: #b9bbbe; font-size: 18px;">Discord Bot Manager - Buy with Robux</p>
+        
+        <!-- Robux Price Display -->
+        <div class="robux-price">
+            <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/roblox_logo_icon_168309.png" class="robux-icon" alt="Robux">
+            <strong>299 Robux</strong>
+            <div style="font-size: 16px; color: #ffcc00;">(One-Time Payment)</div>
+        </div>
+        
+        <!-- Buy with Robux Button -->
+        <a href="https://www.roblox.com/games/YOUR-GAME-ID" class="buy-button" target="_blank">
+            🎮 BUY WITH ROBUX NOW
+        </a>
+        
+        <!-- Alternative Methods -->
+        <div style="margin: 20px 0;">
+            <p style="color: #b9bbbe;">Other payment methods:</p>
+            <a href="https://gumroad.com/l/autocord" style="color: #00b36b; margin: 0 10px;">$14.99 via Gumroad</a> •
+            <a href="https://paypal.me/yourname" style="color: #009cde; margin: 0 10px;">PayPal</a>
+        </div>
+        
+        <!-- How It Works -->
+        <div class="steps">
+            <h3>🎯 How to Buy with Robux:</h3>
+            <div class="step">1. <strong>Click "BUY WITH ROBUX"</strong> above</div>
+            <div class="step">2. <strong>Purchase the "AutoCord Pro" Game Pass</strong> for 299 Robux</div>
+            <div class="step">3. <strong>Join our Discord</strong> (link below)</div>
+            <div class="step">4. <strong>DM @AutoCordBot</strong> with your Roblox username</div>
+            <div class="step">5. <strong>Receive download instantly</strong> after verification</div>
+        </div>
+        
+        <!-- Discord Widget -->
+        <div class="discord-widget">
+            <h3>💬 Need Help? Join Discord</h3>
+            <p>Get instant support and download after purchase</p>
+            <a href="https://discord.gg/YOUR-INVITE" 
+               style="display:inline-block;background:white;color:#5865F2;padding:12px 25px;border-radius:8px;text-decoration:none;font-weight:bold;margin:10px;">
+               JOIN DISCORD SERVER
+            </a>
+        </div>
+        
+        <!-- Warning/Note -->
+        <div class="warning">
+            ⚠️ <strong>Important:</strong> Roblox takes 30% fee from Game Pass purchases. 
+            You pay 299 Robux, we receive ~210 Robux after fees.
+        </div>
+        
+        <!-- Features -->
+        <div style="text-align: left; margin: 30px 0;">
+            <h3>✨ Features:</h3>
+            <div style="padding: 8px 0;">✅ Auto Message Scheduler (5-300s intervals)</div>
+            <div style="padding: 8px 0;">✅ Smart Cleanup - Auto-delete messages</div>
+            <div style="padding: 8px 0;">✅ Draggable Control Panel with Live Stats</div>
+            <div style="padding: 8px 0;">✅ No Installation - Bookmarklet system</div>
+        </div>
+        
+        <div style="margin-top: 40px; color: #72767d; font-size: 14px;">
+            © 2024 AutoCord • Not affiliated with Roblox or Discord Inc.
+            <br>
+            <a href="#" style="color: #7289da; margin: 0 10px;">Terms</a>
+            <a href="#" style="color: #7289da; margin: 0 10px;">Privacy</a>
+            <a href="https://discord.gg/YOUR-INVITE" style="color: #7289da; margin: 0 10px;">Support</a>
+        </div>
+    </div>
+    
+    <script>
+        // Simple animation for buttons
+        document.querySelectorAll('.buy-button').forEach(btn => {
+            btn.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.03)';
+            });
+            btn.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
+        // Track Robux button clicks
+        document.querySelector('.buy-button').addEventListener('click', function() {
+            // You can add analytics here
+            console.log('Robux purchase button clicked');
+        });
+    </script>
+</body>
+</html>
