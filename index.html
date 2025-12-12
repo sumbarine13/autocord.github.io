@@ -1,192 +1,497 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Fake Discord Panel</title>
-<style>
-    body {
-        margin: 0;
-        background: #111;
-        font-family: Arial, sans-serif;
-        color: white;
-        display: flex;
-        height: 100vh;
-        overflow: hidden;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AutoCord Pro — Discord Bot Manager • 1,000 Robux</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <meta name="theme-color" content="#0d0f1a">
+
+  <style>
+    :root{
+      --bg:#0b0d14;
+      --card:#0f1220;
+      --muted:#bfc4d1;
+      --accent-1:#ff4655;       /* roblox red */
+      --accent-2:#5865F2;       /* discord blurple */
+      --accent-3:#ffcc00;       /* robux gold */
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(88,101,242,0.06);
+      --radius:18px;
+      --max-w:1180px;
     }
 
-    /* Left control panel */
-    #controlPanel {
-        width: 260px;
-        background: #1e1f22;
-        padding: 20px;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        border-right: 2px solid #2a2b2f;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100%;
+      color:#e9eef8;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:
+        radial-gradient(600px 400px at 6% 90%, rgba(255,70,85,0.06), transparent 12%),
+        radial-gradient(500px 350px at 92% 8%, rgba(88,101,242,0.06), transparent 10%),
+        linear-gradient(180deg, #07080b 0%, var(--bg) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:36px 20px;
+      display:flex;
+      justify-content:center;
     }
 
-    .btn {
-        background: #5865f2;
-        padding: 12px;
-        border-radius: 8px;
-        text-align: center;
-        color: white;
-        cursor: pointer;
-        transition: 0.15s;
-        user-select: none;
+    .wrap{ width:100%; max-width:var(--max-w); margin:0 auto; }
+
+    header.top{
+      display:flex; gap:20px; align-items:center; justify-content:space-between;
+      padding:18px 22px; border-radius:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent 60%);
+      border:1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px);
+      margin-bottom:28px;
     }
 
-    .btn:hover {
-        background: #4752c4;
+    .brand{ display:flex; align-items:center; gap:14px; }
+    .logo-badge{
+      width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-size:28px;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      box-shadow:0 6px 20px rgba(88,101,242,0.12), inset 0 -6px 18px rgba(0,0,0,0.25);
+    }
+    .brand h1{font-family:Poppins,Inter;margin:0;font-size:20px}
+    .brand p{margin:0;color:var(--muted);font-size:13px}
+
+    nav.toplinks{display:flex;gap:12px;align-items:center}
+    a.nav{ color:var(--muted); text-decoration:none; font-weight:600; padding:8px 14px; border-radius:10px; font-size:14px; transition:all .18s ease; }
+    a.nav:hover{ color:#fff; background:rgba(255,255,255,0.03); transform:translateY(-3px); }
+
+    .hero{ display:grid; grid-template-columns: 1fr 420px; gap:34px; align-items:stretch; margin-bottom:42px; }
+
+    .hero-left{ padding:36px; border-radius:20px; background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px); position:relative; overflow:hidden; }
+
+    .kicker{ display:inline-flex; align-items:center; gap:10px; padding:8px 12px; border-radius:999px; background: linear-gradient(90deg, rgba(88,101,242,0.12), rgba(255,70,85,0.08)); color:var(--muted); font-weight:700; font-size:13px; margin-bottom:18px; }
+
+    .hero-title{
+      font-family:Poppins,Inter; font-size:42px; line-height:1.02; margin:8px 0 18px;
+      background:linear-gradient(90deg,var(--accent-1),var(--accent-3));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow: 0 6px 30px rgba(255,70,85,0.06);
+    }
+    .hero-sub{ color:var(--muted); font-size:16px; max-width:70%; margin-bottom:24px; }
+
+    .cta-row{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+
+    .btn{ display:inline-flex; align-items:center; gap:12px; padding:16px 24px; border-radius:14px; font-weight:800; font-size:15px; text-decoration:none; border:none; cursor:pointer; transition:transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s; }
+    .btn-primary{ background:linear-gradient(135deg,var(--accent-1),#d93a4a); color:white; box-shadow:0 18px 40px rgba(255,70,85,0.16); min-width:220px; }
+    .btn-ghost{ background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); min-width:180px; }
+
+    .price-card{ margin-top:20px; display:inline-grid; grid-auto-flow:row; gap:8px; padding:18px; border-radius:12px; align-items:center; background:linear-gradient(180deg, rgba(255,204,0,0.06), rgba(255,255,255,0.01)); border:1px solid rgba(255,204,0,0.06); }
+    .price-big{ display:flex; align-items:center; gap:12px; font-weight:900; font-size:34px; color:var(--accent-3); }
+    .price-note{ font-size:13px; color:var(--muted); }
+
+    .hero-right{ border-radius:20px; padding:22px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); backdrop-filter:blur(6px); }
+
+    .section{ margin-top:18px; padding:22px; border-radius:14px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid rgba(255,255,255,0.02); }
+    .features-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:16px; margin-top:18px; }
+    .feature{ padding:18px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border:1px solid rgba(255,255,255,0.02); transition:transform .18s ease, box-shadow .18s; }
+    .feature:hover{ transform:translateY(-8px); box-shadow:0 20px 40px rgba(0,0,0,0.45); }
+    .feature .icon{ font-size:20px; margin-bottom:10px; background:linear-gradient(90deg,var(--accent-2),var(--accent-1)); -webkit-background-clip:text; color:transparent; }
+    .feature h3{ margin:0 0 8px; font-size:16px; }
+    .feature p{ margin:0; color:var(--muted); font-size:14px; }
+
+    .cta-banner{ display:flex; gap:20px; padding:22px; border-radius:14px; align-items:center; justify-content:space-between; margin-top:22px; background:linear-gradient(90deg, rgba(88,101,242,0.04), rgba(255,70,85,0.02)); border:1px solid rgba(255,255,255,0.02); }
+
+    footer.site{ margin-top:36px; padding:20px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border:1px solid rgba(255,255,255,0.02); color:var(--muted); font-size:13px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+
+    /* Demo layout specifics */
+    .demo-wrap { display:flex; gap:18px; align-items:flex-start; margin-top:8px; }
+    .demo-panel { background:#2f3136; color:white; padding:14px; border-radius:12px; border:2px solid #7289da; min-width:300px; box-shadow:0 8px 30px rgba(0,0,0,0.5); }
+    .demo-channel { flex:1; background:#36393f; color:white; padding:14px; border-radius:12px; border:2px solid #2f3136; max-height:420px; overflow:auto; box-shadow:0 8px 30px rgba(0,0,0,0.45); }
+    .demo-panel .panel-header { display:flex; justify-content:space-between; align-items:center; padding:6px 8px; border-radius:6px; background: rgba(114,137,218,0.08); color:var(--accent-2); font-weight:700; margin-bottom:10px; }
+    .demo-panel button.small { padding:8px 10px; border-radius:6px; border:none; cursor:pointer; font-weight:700; }
+    .demo-console { background:#202225; padding:8px; border-radius:8px; color:#b9bbbe; font-size:12px; max-height:140px; overflow:auto; }
+    .fake-msg { margin-bottom:8px; padding:8px; border-radius:8px; background:rgba(255,255,255,0.02); }
+    .fake-msg .author { color:#43b581; font-weight:700; margin-right:8px; }
+
+    @media (max-width:1100px){
+      .hero{ grid-template-columns: 1fr; }
+      .demo-wrap{ flex-direction:column; }
+      .features-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width:640px){
+      .features-grid{ grid-template-columns:1fr }
+      .hero-sub{ max-width:100% }
     }
 
-    /* Fake Discord channel */
-    #channel {
-        flex: 1;
-        background: #2b2d31;
-        display: flex;
-        flex-direction: column;
-    }
-
-    #channelHeader {
-        padding: 15px;
-        background: #1e1f22;
-        border-bottom: 2px solid #2a2b2f;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    #messages {
-        flex: 1;
-        padding: 20px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .msg {
-        background: #313338;
-        padding: 10px 14px;
-        border-radius: 8px;
-        max-width: 70%;
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-
-    .username {
-        font-weight: bold;
-        margin-bottom: 3px;
-    }
-
-    #inputBar {
-        display: flex;
-        padding: 15px;
-        gap: 10px;
-        background: #1e1f22;
-    }
-
-    #msgInput {
-        flex: 1;
-        padding: 10px;
-        background: #2b2d31;
-        border: none;
-        outline: none;
-        color: white;
-        border-radius: 6px;
-        font-size: 15px;
-    }
-
-    #sendBtn {
-        padding: 10px 20px;
-        background: #5865f2;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        color: white;
-    }
-
-    #sendBtn:hover {
-        background: #4752c4;
-    }
-
-    /* Robux image */
-    .robux-icon {
-        width: 28px;
-        height: 28px;
-    }
-</style>
+    .reveal{ opacity:0; transform:translateY(8px); transition:transform .6s cubic-bezier(.2,.9,.3,1),opacity .6s }
+    .reveal.visible{ opacity:1; transform:translateY(0) }
+  </style>
 </head>
 <body>
-
-<!-- LEFT SIDE PANEL -->
-<div id="controlPanel">
-    <h2>Control Panel</h2>
-
-    <div class="btn" onclick="sendRobuxMessage()">Send Robux Gift</div>
-    <div class="btn" onclick="sendRandom()">Send Random Msg</div>
-    <div class="btn" onclick="clearChat()">Clear Chat</div>
-</div>
-
-<!-- FAKE DISCORD CHANNEL -->
-<div id="channel">
-    <div id="channelHeader"># general</div>
-
-    <div id="messages"></div>
-
-    <div id="inputBar">
-        <input id="msgInput" type="text" placeholder="Message #general…" />
-        <button id="sendBtn" onclick="sendCustom()">Send</button>
-    </div>
-</div>
-
-<script>
-const messages = document.getElementById("messages");
-
-function addMessage(text, robux = false) {
-    const box = document.createElement("div");
-    box.className = "msg";
-
-    box.innerHTML = `
+  <div class="wrap" role="main">
+    <header class="top" aria-label="Site header">
+      <div class="brand">
+        <div class="logo-badge" aria-hidden>🤖</div>
         <div>
-            <div class="username">You</div>
-            <div>${text}</div>
+          <h1>AutoCord Pro</h1>
+          <p>Discord automation built for Roblox communities</p>
         </div>
-        ${robux ? '<img class="robux-icon" src="https://static.wikia.nocookie.net/roblox/images/5/58/Robux_Gold.svg" />' : ""}
-    `;
+      </div>
 
-    messages.appendChild(box);
-    messages.scrollTop = messages.scrollHeight;
-}
+      <nav class="toplinks" aria-label="Primary navigation">
+        <a class="nav" href="#features">Features</a>
+        <a class="nav" href="#howto">How to buy</a>
+        <a class="nav" href="#support">Support</a>
+        <a class="nav" href="#pricing">Pricing</a>
+      </nav>
+    </header>
 
-function sendCustom() {
-    const input = document.getElementById("msgInput");
-    if (input.value.trim() === "") return;
-    addMessage(input.value);
-    input.value = "";
-}
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-left">
+        <div class="kicker">Pro • Lifetime • Secure</div>
+        <h2 id="hero-heading" class="hero-title">Automate Discord — built for <span style="background:linear-gradient(90deg,var(--accent-2),var(--accent-1));-webkit-background-clip:text;color:transparent">Roblox</span></h2>
+        <p class="hero-sub">AutoCord Pro gives you scheduled messaging, auto-cleanup, moderation workflows, and one-click integration with Roblox groups — all with super-low latency and robust safety controls.</p>
 
-function sendRobuxMessage() {
-    addMessage("You received 4,000 Robux!", true);
-}
+        <!-- BUY and Demo buttons -->
+        <div class="cta-row">
+          <a href="https://www.roblox.com/games/YOUR-GAME-ID/gamepass/YOUR-GAMEPASS-ID" class="btn btn-primary" target="_blank" rel="noopener" aria-label="Buy with Robux">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968332.png" alt="Robux" style="height:20px;"> BUY — 1,000 Robux
+          </a>
 
-function sendRandom() {
-    const texts = [
-        "Hello!",
-        "Testing the panel!",
-        "This looks real!",
-        "Cool fake Discord!",
-        "Nice interface!"
-    ];
-    addMessage(texts[Math.floor(Math.random() * texts.length)]);
-}
+          <button class="btn btn-ghost" id="demoBtn" aria-haspopup="dialog" aria-controls="demoModal">
+            <i class="fas fa-play-circle"></i> Live Demo
+          </button>
+        </div>
 
-function clearChat() {
-    messages.innerHTML = "";
-}
-</script>
+        <!-- Price Card -->
+        <div class="price-card" aria-hidden>
+          <div class="price-big">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968332.png" alt="Robux" style="height:30px;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45))">
+            1,000
+          </div>
+          <div class="price-note">One-time • Lifetime access • Free updates</div>
+        </div>
 
+        <!-- Already Purchased Card -->
+        <div id="alreadyPurchasedCard" style="margin-top:20px;max-width:380px;padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(88,101,242,0.05), rgba(255,70,85,0.05));border:1px solid rgba(255,255,255,0.05);text-align:center;">
+          <h4 style="margin:0 0 10px;font-size:16px;color:#fff;">Already Purchased?</h4>
+          <p style="font-size:13px;color:#b9bbbe;margin:0 0 12px;">
+            Join our Discord server and create a support ticket with your Roblox username. Our team will verify your purchase and respond shortly.
+          </p>
+          <a href="https://discord.gg/5aZKV8eE5R" target="_blank" class="btn btn-primary" style="font-size:14px;">Join Discord</a>
+        </div>
+      </div>
+
+      <aside class="hero-right" aria-label="Preview & quick stats">
+        <div class="preview-top">
+          <div class="preview-avatar">🤖</div>
+          <div class="preview-meta">
+            <h4>AutoCord Preview</h4>
+            <p>Ready-to-deploy bot flows and quick verification.</p>
+          </div>
+        </div>
+
+        <div class="stats" aria-hidden>
+          <div class="stat">
+            <b>1K</b><small>Robux</small>
+          </div>
+          <div class="stat">
+            <b>24/7</b><small>Support</small>
+          </div>
+          <div class="stat">
+            <b>Instant</b><small>Delivery</small>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;color:var(--muted);font-size:14px;">
+          <strong>Trusted:</strong> Roblox developers • group owners • community managers
+        </div>
+      </aside>
+    </section>
+
+    <!-- FEATURES / DEMO -->
+    <section id="features" class="section" aria-labelledby="features-heading">
+      <h3 id="features-heading" style="margin:0;font-size:18px">Powerful features</h3>
+
+      <!-- Feature cards (summarize JS features) -->
+      <div class="features-grid" style="margin-top:14px;">
+        <div class="feature reveal">
+          <div class="icon"><i class="fas fa-robot"></i></div>
+          <h3>Automated Messaging</h3>
+          <p>Simulate scheduled messages with custom content and intervals — test how messages behave before deploying.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon"><i class="fas fa-trash-alt"></i></div>
+          <h3>Auto-Deletion</h3>
+          <p>Auto-delete messages after a set interval to keep channels clean — demo supports bulk-delete simulation.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon"><i class="fas fa-chart-bar"></i></div>
+          <h3>Real-Time Status</h3>
+          <p>View live stats: sent count, deleted count, active messages, and channel preview in the demo panel.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon"><i class="fas fa-key"></i></div>
+          <h3>Token Safe Demo</h3>
+          <p>One-click copy for a demo token — safe simulation only (we do not access real tokens from the browser).</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon"><i class="fas fa-cogs"></i></div>
+          <h3>Custom Settings</h3>
+          <p>Change send/delete intervals, message content and target channel in the demo settings panel.</p>
+        </div>
+
+        <div class="feature reveal">
+          <div class="icon"><i class="fas fa-play-circle"></i></div>
+          <h3>Start / Stop Controls</h3>
+          <p>Start and stop the demo bot; see logs and messages in the fake channel — behaves just like the real UI.</p>
+        </div>
+      </div>
+
+      <!-- DEMO: bot panel + fake channel (side-by-side) -->
+      <div class="demo-wrap" id="demoArea">
+        <!-- Demo Bot Panel (replica of real panel but simulated) -->
+        <div class="demo-panel" id="demoPanel">
+          <div class="panel-header">
+            <div>🤖 DEMO BOT</div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <button id="demoMinBtn" class="small" style="background:var(--accent-2);color:white;border-radius:6px;padding:6px 8px;">MINIMIZE</button>
+            </div>
+          </div>
+
+          <div class="panel-content">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+              <button id="demoStart" class="small" style="background:#43b581;color:white;border-radius:6px;">▶️ START</button>
+              <button id="demoStop" class="small" style="background:#f04747;color:white;border-radius:6px;">⏹️ STOP</button>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+              <button id="demoSend" class="small" style="background:#faa61a;color:white;border-radius:6px;">📤 SEND</button>
+              <button id="demoDelete" class="small" style="background:#747f8d;color:white;border-radius:6px;">🗑️ DELETE</button>
+            </div>
+
+            <div style="margin-bottom:10px;">
+              <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Message (demo):</label>
+              <input id="demoMessageInput" type="text" value="Hello from AutoCord Demo!" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:#202225;color:#e9eef8;">
+            </div>
+
+            <div style="display:flex;gap:8px;margin-bottom:10px;">
+              <div style="flex:1">
+                <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Send Interval (s)</label>
+                <input id="demoSendInterval" type="number" min="1" value="5" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:#202225;color:#e9eef8;">
+              </div>
+              <div style="width:120px">
+                <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">Delete After (s)</label>
+                <input id="demoDelInterval" type="number" min="1" value="12" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:#202225;color:#e9eef8;">
+              </div>
+            </div>
+
+            <div style="margin-bottom:10px;">
+              <div style="font-size:13px;color:var(--muted);margin-bottom:6px;">📝 LOGS</div>
+              <div id="demoLogs" class="demo-console"></div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:13px;color:var(--muted);">🔑 Demo Token: <span id="demoToken">demo_token_1234</span></div>
+              <div>
+                <button id="demoCopy" class="small" style="background:#7289da;color:white;border-radius:6px;">📋 COPY</button>
+                <button id="openSettings" class="small" style="background:#5865f2;color:white;border-radius:6px;margin-left:8px;">⚙️ SETTINGS</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fake Channel (next to panel) -->
+        <div class="demo-channel" id="fakeChannel">
+          <div style="color:var(--accent-2); font-weight:800; margin-bottom:10px;"># demo-channel</div>
+          <div id="fakeMessages">
+            <!-- messages will be injected here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / Pricing -->
+    <div class="cta-banner reveal" style="margin-top:18px" id="pricing">
+      <div class="left">
+        <h3 style="margin:0">Ready to automate your Discord?</h3>
+        <p style="margin:6px 0 0">One-time 1,000 Robux — lifetime license, instant verification bot delivery.</p>
+      </div>
+
+      <div class="right">
+        <a class="discord-btn" href="https://discord.gg/5aZKV8eE5R" target="_blank" rel="noopener">
+          <i class="fab fa-discord"></i> Join Discord
+        </a>
+      </div>
+    </div>
+
+    <footer class="site">
+      <div>&copy; 2025 AutoCord Pro. All rights reserved.</div>
+      <div>Made with ❤️ for Roblox communities</div>
+    </footer>
+  </div>
+
+  <!-- Demo JS (safe simulation only) -->
+  <script>
+    (function(){
+      // Demo state
+      let sendTimer = null;
+      let deleteTimer = null;
+      let demoCount = 0;
+      const logsEl = document.getElementById('demoLogs');
+      const fakeMessagesEl = document.getElementById('fakeMessages');
+
+      // helpers
+      function addLog(type, text){
+        const colors = { success: '#43b581', error: '#f04747', info: '#7289da', warning:'#faa61a' };
+        const d = new Date();
+        const time = d.toLocaleTimeString();
+        const el = document.createElement('div');
+        el.style.color = colors[type] || '#b9bbbe';
+        el.style.fontSize = '12px';
+        el.style.padding = '4px 0';
+        el.textContent = `[${time}] ${text}`;
+        logsEl.prepend(el);
+      }
+
+      function addFakeMessage(text){
+        const msgWrap = document.createElement('div');
+        msgWrap.className = 'fake-msg';
+        const author = document.createElement('div');
+        author.className = 'author';
+        author.textContent = 'You';
+        author.style.color = '#43b581';
+        author.style.fontWeight = '700';
+        const body = document.createElement('div');
+        body.textContent = text;
+        msgWrap.appendChild(author);
+        msgWrap.appendChild(body);
+        fakeMessagesEl.appendChild(msgWrap);
+        // auto-scroll
+        fakeMessagesEl.scrollTop = fakeMessagesEl.scrollHeight;
+      }
+
+      function clearFakeMessages(){
+        fakeMessagesEl.innerHTML = '';
+      }
+
+      // DOM refs
+      const btnStart = document.getElementById('demoStart');
+      const btnStop = document.getElementById('demoStop');
+      const btnSend = document.getElementById('demoSend');
+      const btnDel  = document.getElementById('demoDelete');
+      const inputMsg = document.getElementById('demoMessageInput');
+      const inputSI = document.getElementById('demoSendInterval');
+      const inputDI = document.getElementById('demoDelInterval');
+      const btnCopy = document.getElementById('demoCopy');
+      const btnMin = document.getElementById('demoMinBtn');
+      const panelContent = document.querySelector('#demoPanel .panel-content');
+      const btnSettings = document.getElementById('openSettings');
+
+      // Start simulation: send immediately and schedule repeated sends/deletes
+      function startDemo(){
+        if(sendTimer) { addLog('warning','Demo already running'); return; }
+        addLog('info','Starting demo bot');
+        // single send now
+        doSend();
+        // set timers
+        sendTimer = setInterval(doSend, Math.max(1000, (parseInt(inputSI.value)||5) * 1000));
+        deleteTimer = setInterval(doDelete, Math.max(1000, (parseInt(inputDI.value)||12) * 1000));
+        updateStatusUI(true);
+      }
+
+      function stopDemo(){
+        if(!sendTimer){ addLog('warning','Demo not running'); return; }
+        clearInterval(sendTimer); clearInterval(deleteTimer); sendTimer=null; deleteTimer=null;
+        addLog('warning','Demo stopped');
+        updateStatusUI(false);
+      }
+
+      function doSend(){
+        demoCount++;
+        const text = inputMsg.value || `Demo message #${demoCount}`;
+        addLog('success', `Sent: ${text}`);
+        addFakeMessage(text);
+      }
+
+      function doDelete(){
+        if(demoCount === 0){
+          addLog('warning', 'No demo messages to delete');
+          return;
+        }
+        addLog('success', `Deleted ${demoCount} demo messages`);
+        demoCount = 0;
+        clearFakeMessages();
+      }
+
+      function updateStatusUI(running){
+        // Update small visual cue in header if needed (kept simple)
+        // (In a full integration you could show counts etc.)
+      }
+
+      // Button wiring
+      btnStart.addEventListener('click', startDemo);
+      btnStop.addEventListener('click', stopDemo);
+      btnSend.addEventListener('click', doSend);
+      btnDel.addEventListener('click', doDelete);
+      btnCopy.addEventListener('click', function(){
+        const demoToken = document.getElementById('demoToken').textContent;
+        navigator.clipboard?.writeText(demoToken).then(()=> {
+          alert('✅ Demo token copied: ' + demoToken);
+        }).catch(()=> {
+          alert('Demo token: ' + demoToken);
+        });
+      });
+
+      btnMin.addEventListener('click', function(){
+        if(panelContent.style.display === 'none'){
+          panelContent.style.display = 'block';
+          this.textContent = 'MINIMIZE';
+        } else {
+          panelContent.style.display = 'none';
+          this.textContent = 'EXPAND';
+        }
+      });
+
+      // Settings quick dialog (safe, client-only)
+      btnSettings.addEventListener('click', function(){
+        const newMsg = prompt('Default demo message:', inputMsg.value);
+        if(newMsg !== null) inputMsg.value = newMsg;
+        const newSI = prompt('Send interval in seconds:', inputSI.value);
+        if(newSI !== null) inputSI.value = Math.max(1, parseInt(newSI)||5);
+        const newDI = prompt('Delete interval in seconds:', inputDI.value);
+        if(newDI !== null) inputDI.value = Math.max(1, parseInt(newDI)||12);
+        addLog('info', 'Settings updated (demo only)');
+        // if demo is running, restart timers to apply new intervals
+        if(sendTimer){
+          clearInterval(sendTimer); clearInterval(deleteTimer);
+          sendTimer = setInterval(doSend, Math.max(1000, (parseInt(inputSI.value)||5) * 1000));
+          deleteTimer = setInterval(doDelete, Math.max(1000, (parseInt(inputDI.value)||12) * 1000));
+        }
+      });
+
+      // small UX: Live Demo button in hero opens demo area (scrolls)
+      document.getElementById('demoBtn').addEventListener('click', function(){
+        document.getElementById('demoArea').scrollIntoView({behavior:'smooth', block:'center'});
+        addLog('info','Opened demo area');
+      });
+
+      // reveal animation for features
+      document.querySelectorAll('.reveal').forEach((el, i) => {
+        setTimeout(()=> el.classList.add('visible'), 100 + i * 80);
+      });
+
+      // initial log
+      addLog('info','Demo ready — this is a safe simulation (no tokens are accessed).');
+    })();
+  </script>
 </body>
 </html>
