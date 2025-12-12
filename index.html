@@ -1,215 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AutoCord Pro Demo</title>
-<style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #36393f;
-  color: #fff;
-}
-header {
-  background: #5865f2;
-  padding: 15px 20px;
-  font-size: 20px;
-  font-weight: bold;
-}
-.container {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-}
-#demo-area, #bot-demo {
-  background: #2f3136;
-  border-radius: 8px;
-  padding: 15px;
-  flex: 1;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-#demo-area {
-  display: flex;
-  flex-direction: column;
-}
-#demo-channel {
-  flex: 1;
-  background: #202225;
-  border-radius: 5px;
-  padding: 10px;
-  overflow-y: auto;
-  font-size: 12px;
-  margin-bottom: 10px;
-}
-#demo-input {
-  display: flex;
-  gap: 5px;
-}
-#demo-input input {
-  flex: 1;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #40444b;
-  background: #36393f;
-  color: white;
-}
-#demo-input button {
-  background: #43b581;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
-}
-#bot-demo .panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 10px;
-  background: #7289da20;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: move;
-}
-#bot-demo button {
-  cursor: pointer;
-}
-.panel-content {
-  margin-top: 10px;
-}
-#botConsole {
-  max-height: 100px;
-  overflow-y: auto;
-  font-size: 11px;
-  color: #b9bbbe;
-  background: #202225;
-  padding: 10px;
-  border-radius: 5px;
-}
-input, textarea {
-  width: 100%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #40444b;
-  background: #36393f;
-  color: white;
-  font-size: 12px;
-  margin-bottom: 5px;
-}
-.grid2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoCord Pro • Discord Bot Manager</title>
+  <style>
+    body, html { margin:0; padding:0; font-family: Arial, sans-serif; background:#18191c; color:white; }
+    a { color:#7289da; text-decoration:none; cursor:pointer; }
+    .nav { display:flex; background:#202225; padding:10px; gap:20px; }
+    .nav a { font-weight:bold; }
+    .page { display:none; padding:20px; }
+    .active { display:block; }
+    .container { display:flex; gap:20px; }
+    .demo-channel { flex:1; background:#2f3136; padding:10px; border-radius:8px; height:500px; overflow-y:auto; font-size:13px; display:flex; flex-direction:column; }
+    .demo-input { margin-top:auto; display:flex; gap:5px; }
+    .demo-input input { flex:1; padding:8px; border-radius:4px; border:none; background:#40444b; color:white; font-size:12px; }
+    .demo-input button { background:#5865f2; color:white; border:none; padding:8px 12px; border-radius:4px; cursor:pointer; font-size:12px; }
+    .bot-demo { flex:1; position:relative; }
+    /* Bot panel styles */
+    .bot-panel { position:relative; background:#2f3136; color:white; padding:15px; border-radius:8px; border:2px solid #7289da; min-width:300px; box-shadow:0 4px 20px rgba(0,0,0,0.5); }
+    .bot-header { display:flex; justify-content:space-between; align-items:center; font-size:18px; font-weight:bold; padding:8px 10px; cursor:move; user-select:none; background:#7289da20; border-radius:4px; }
+    .panel-content { margin-top:10px; }
+    .bot-status, .bot-logs { background:#202225; padding:10px; border-radius:5px; font-size:12px; margin-bottom:10px; max-height:120px; overflow-y:auto; }
+    .bot-buttons { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+    .bot-buttons button { padding:12px; border:none; border-radius:5px; font-weight:bold; cursor:pointer; }
+    .start-btn { background:#43b581; color:white; }
+    .stop-btn { background:#f04747; color:white; }
+    .send-btn { background:#faa61a; color:white; }
+    .del-btn { background:#747f8d; color:white; }
+    .settings-btn { background:#5865f2; color:white; width:100%; margin-bottom:10px; }
+    .close-btn { background:#f04747; color:white; padding:8px 15px; border:none; border-radius:4px; cursor:pointer; font-size:12px; }
+    .settings-panel { position:absolute; top:50px; left:50px; background:#2f3136; color:white; padding:15px; border-radius:8px; border:2px solid #43b581; min-width:300px; z-index:9999; display:none; }
+    .settings-panel input, .settings-panel textarea { width:100%; padding:8px; border-radius:4px; border:1px solid #40444b; background:#36393f; color:white; font-size:12px; margin-bottom:10px; }
+    .settings-panel button { width:100%; padding:12px; border:none; border-radius:5px; font-weight:bold; cursor:pointer; background:#43b581; color:white; margin-bottom:5px; }
+  </style>
 </head>
 <body>
-<header>AutoCord Pro Demo</header>
-<div class="container">
-  <!-- Demo Channel -->
-  <div id="demo-area">
-    <div id="demo-channel">Welcome to the demo channel!<br></div>
-    <div id="demo-input">
-      <input id="demoMsg" type="text" placeholder="Type a message...">
-      <button onclick="sendDemo()">Send</button>
-    </div>
+
+  <!-- Navigation -->
+  <div class="nav">
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('pricing')">Pricing</a>
+    <a onclick="showPage('demo')">Bot Demo</a>
   </div>
 
-  <!-- Bot Panel -->
-  <div id="bot-demo">
-    <div class="panel-header">
-      <span>🤖 BOT</span>
-      <button id="minBtn">MINIMIZE</button>
-    </div>
-    <div class="panel-content">
-      <div id="botStatus">🔴 STOPPED</div>
-      <div class="grid2">
-        <button id="startBtn">▶️ START</button>
-        <button id="stopBtn">⏹️ STOP</button>
+  <!-- Home Page -->
+  <div id="home" class="page active">
+    <h1>Welcome to AutoCord Pro</h1>
+    <p>Manage your Discord bots easily and efficiently.</p>
+  </div>
+
+  <!-- Pricing Page -->
+  <div id="pricing" class="page">
+    <h1>Pricing</h1>
+    <ul>
+      <li>Basic 15 Days: ₹1,000</li>
+      <li>Basic 30 Days: ₹1,800</li>
+      <li>Pro 15 Days: ₹2,500</li>
+      <li>Pro 30 Days: ₹4,500</li>
+    </ul>
+  </div>
+
+  <!-- Bot Demo Page -->
+  <div id="demo" class="page">
+    <div class="container">
+      
+      <!-- Demo Channel -->
+      <div class="demo-channel" id="demoChannel">
+        <div><strong>Demo Channel</strong></div>
       </div>
-      <div class="grid2">
-        <button id="sendBtn">📤 SEND</button>
-        <button id="delBtn">🗑️ DELETE</button>
+      <div class="demo-input">
+        <input type="text" id="demoMessage" placeholder="Type message...">
+        <button onclick="sendDemoMessage()">Send</button>
       </div>
-      <button id="setBtn" style="width:100%; margin-bottom:10px;">⚙️ SETTINGS</button>
-      <div id="botConsole"></div>
+
+      <!-- Bot Panel -->
+      <div class="bot-demo">
+        <div class="bot-panel" id="botPanel">
+          <div class="bot-header">
+            <span>🤖 BOT</span>
+            <button id="minimizeBtn">MINIMIZE</button>
+          </div>
+          <div class="panel-content">
+            <div class="bot-status" id="botStatus">🔴 STOPPED</div>
+
+            <div class="bot-buttons">
+              <button class="start-btn" onclick="startBot()">▶️ START</button>
+              <button class="stop-btn" onclick="stopBot()">⏹️ STOP</button>
+            </div>
+            <div class="bot-buttons">
+              <button class="send-btn" onclick="sendBot()">📤 SEND</button>
+              <button class="del-btn" onclick="deleteBot()">🗑️ DELETE</button>
+            </div>
+
+            <button class="settings-btn" onclick="toggleSettings()">⚙️ SETTINGS</button>
+
+            <div class="bot-logs" id="botLogs"></div>
+            <button class="close-btn" onclick="closeBot()">✕ CLOSE</button>
+          </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settingsPanel">
+          <div><strong>⚙️ SETTINGS</strong></div>
+          <input type="text" id="botChannel" placeholder="Channel ID / Demo Channel">
+          <textarea id="botMessage" rows="3" placeholder="Message..."></textarea>
+          <input type="number" id="botSendInterval" placeholder="Send Interval (s)" value="16">
+          <input type="number" id="botDeleteInterval" placeholder="Delete Interval (s)" value="30">
+          <button onclick="saveSettings()">💾 SAVE</button>
+          <button onclick="toggleSettings()">✕ CLOSE</button>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
 
 <script>
-// Demo variables
-let demoMessages = [];
-let running = false;
-
-// Demo send function
-function sendDemo() {
-  const input = document.getElementById('demoMsg');
-  const msg = input.value.trim();
-  if (!msg) return;
-  const channel = document.getElementById('demo-channel');
-  const time = new Date().toLocaleTimeString();
-  channel.innerHTML += `[${time}] USER: ${msg}<br>`;
-  input.value = '';
-}
-
-// Bot panel functions
-const botStatus = document.getElementById('botStatus');
-const botConsole = document.getElementById('botConsole');
-
-function log(type, msg) {
-  const color = { success: '#43b581', error: '#f04747', info: '#7289da', warning: '#faa61a' }[type];
-  const time = new Date().toLocaleTimeString();
-  botConsole.innerHTML += `<div style="color:${color};">[${time}] ${msg}</div>`;
-  botConsole.scrollTop = botConsole.scrollHeight;
-}
-
-document.getElementById('startBtn').onclick = () => {
-  if (running) { log('warning','Already running'); return; }
-  running = true;
-  botStatus.innerHTML = '🟢 RUNNING';
-  log('info','Bot started');
-};
-
-document.getElementById('stopBtn').onclick = () => {
-  running = false;
-  botStatus.innerHTML = '🔴 STOPPED';
-  log('info','Bot stopped');
-};
-
-document.getElementById('sendBtn').onclick = () => {
-  if (!running) { log('error','Bot not running'); return; }
-  const demoInput = document.getElementById('demoMsg');
-  if (!demoInput.value.trim()) { log('warning','No message'); return; }
-  sendDemo();
-  log('success','Message sent');
-};
-
-document.getElementById('delBtn').onclick = () => {
-  if (!running) { log('error','Bot not running'); return; }
-  const channel = document.getElementById('demo-channel');
-  channel.innerHTML = '';
-  log('success','Messages deleted');
-};
-
-// Minimize panel
-document.getElementById('minBtn').onclick = () => {
-  const panel = document.querySelector('#bot-demo .panel-content');
-  if (panel.style.display === 'none') {
-    panel.style.display = 'block';
-    document.getElementById('minBtn').textContent = 'MINIMIZE';
-  } else {
-    panel.style.display = 'none';
-    document.getElementById('minBtn').textContent = 'EXPAND';
+  // Page navigation
+  function showPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
   }
-};
 
-// Settings button (dummy)
-document.getElementById('setBtn').onclick = () => {
-  alert('Settings panel would appear here!');
-};
+  // Bot Demo Logic
+  let botRunning = false;
+  let sendInterval, deleteInterval;
+  let demoMessages = [];
+
+  function logBot(message, type='info') {
+    const logs = document.getElementById('botLogs');
+    const color = type==='error'?'#f04747': type==='success'?'#43b581':'#7289da';
+    logs.innerHTML += `<div style="color:${color}; margin:2px 0;">${message}</div>`;
+    logs.scrollTop = logs.scrollHeight;
+  }
+
+  function startBot(){
+    if(botRunning){ logBot('Bot already running', 'warning'); return; }
+    botRunning = true;
+    document.getElementById('botStatus').textContent = '🟢 RUNNING';
+    logBot('Bot started', 'success');
+    // Example interval sending
+    sendInterval = setInterval(sendBot, parseInt(document.getElementById('botSendInterval').value)*1000);
+    deleteInterval = setInterval(deleteBot, parseInt(document.getElementById('botDeleteInterval').value)*1000);
+  }
+
+  function stopBot(){
+    if(!botRunning){ logBot('Bot not running', 'warning'); return; }
+    botRunning = false;
+    document.getElementById('botStatus').textContent = '🔴 STOPPED';
+    clearInterval(sendInterval);
+    clearInterval(deleteInterval);
+    logBot('Bot stopped', 'info');
+  }
+
+  function sendBot(){
+    const msg = document.getElementById('botMessage').value || 'Hello!';
+    const channel = document.getElementById('botChannel').value || 'demoChannel';
+    demoMessages.push(msg);
+    const demoChannel = document.getElementById('demoChannel');
+    const div = document.createElement('div');
+    div.textContent = `🤖 BOT: ${msg}`;
+    demoChannel.appendChild(div);
+    demoChannel.scrollTop = demoChannel.scrollHeight;
+    logBot(`Sent message: ${msg}`, 'success');
+  }
+
+  function deleteBot(){
+    if(demoMessages.length === 0) { logBot('No messages to delete', 'warning'); return; }
+    const demoChannel = document.getElementById('demoChannel');
+    const lastMsg = demoChannel.querySelector('div:last-child');
+    if(lastMsg){ lastMsg.remove(); demoMessages.pop(); logBot('Deleted last message', 'info'); }
+  }
+
+  function toggleSettings(){
+    const sp = document.getElementById('settingsPanel');
+    sp.style.display = sp.style.display==='block'?'none':'block';
+  }
+
+  function saveSettings(){
+    logBot('Settings saved', 'success');
+    toggleSettings();
+  }
+
+  function closeBot(){
+    stopBot();
+    document.getElementById('botPanel').remove();
+    document.getElementById('settingsPanel').remove();
+  }
+
+  // Minimize / Expand
+  document.getElementById('minimizeBtn').addEventListener('click', ()=>{
+    const content = document.querySelector('.panel-content');
+    if(content.style.display==='none'){
+      content.style.display='block';
+      document.getElementById('minimizeBtn').textContent='MINIMIZE';
+    } else {
+      content.style.display='none';
+      document.getElementById('minimizeBtn').textContent='EXPAND';
+    }
+  });
+
+  function sendDemoMessage(){
+    const input = document.getElementById('demoMessage');
+    const demoChannel = document.getElementById('demoChannel');
+    if(!input.value) return;
+    const div = document.createElement('div');
+    div.textContent = `💬 USER: ${input.value}`;
+    demoChannel.appendChild(div);
+    demoChannel.scrollTop = demoChannel.scrollHeight;
+    input.value='';
+  }
 </script>
+
 </body>
 </html>
