@@ -495,3 +495,195 @@
   </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fake Discord Panel</title>
+<style>
+    body {
+        margin: 0;
+        background: #111;
+        font-family: Arial, sans-serif;
+        color: white;
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* Left control panel */
+    #controlPanel {
+        width: 260px;
+        background: #1e1f22;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        border-right: 2px solid #2a2b2f;
+    }
+
+    .btn {
+        background: #5865f2;
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+        color: white;
+        cursor: pointer;
+        transition: 0.15s;
+        user-select: none;
+    }
+
+    .btn:hover {
+        background: #4752c4;
+    }
+
+    /* Fake Discord channel */
+    #channel {
+        flex: 1;
+        background: #2b2d31;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #channelHeader {
+        padding: 15px;
+        background: #1e1f22;
+        border-bottom: 2px solid #2a2b2f;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    #messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .msg {
+        background: #313338;
+        padding: 10px 14px;
+        border-radius: 8px;
+        max-width: 70%;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .username {
+        font-weight: bold;
+        margin-bottom: 3px;
+    }
+
+    #inputBar {
+        display: flex;
+        padding: 15px;
+        gap: 10px;
+        background: #1e1f22;
+    }
+
+    #msgInput {
+        flex: 1;
+        padding: 10px;
+        background: #2b2d31;
+        border: none;
+        outline: none;
+        color: white;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    #sendBtn {
+        padding: 10px 20px;
+        background: #5865f2;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        color: white;
+    }
+
+    #sendBtn:hover {
+        background: #4752c4;
+    }
+
+    /* Robux image */
+    .robux-icon {
+        width: 28px;
+        height: 28px;
+    }
+</style>
+</head>
+<body>
+
+<!-- LEFT SIDE PANEL -->
+<div id="controlPanel">
+    <h2>Control Panel</h2>
+
+    <div class="btn" onclick="sendRobuxMessage()">Send Robux Gift</div>
+    <div class="btn" onclick="sendRandom()">Send Random Msg</div>
+    <div class="btn" onclick="clearChat()">Clear Chat</div>
+</div>
+
+<!-- FAKE DISCORD CHANNEL -->
+<div id="channel">
+    <div id="channelHeader"># general</div>
+
+    <div id="messages"></div>
+
+    <div id="inputBar">
+        <input id="msgInput" type="text" placeholder="Message #general…" />
+        <button id="sendBtn" onclick="sendCustom()">Send</button>
+    </div>
+</div>
+
+<script>
+const messages = document.getElementById("messages");
+
+function addMessage(text, robux = false) {
+    const box = document.createElement("div");
+    box.className = "msg";
+
+    box.innerHTML = `
+        <div>
+            <div class="username">You</div>
+            <div>${text}</div>
+        </div>
+        ${robux ? '<img class="robux-icon" src="https://static.wikia.nocookie.net/roblox/images/5/58/Robux_Gold.svg" />' : ""}
+    `;
+
+    messages.appendChild(box);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+function sendCustom() {
+    const input = document.getElementById("msgInput");
+    if (input.value.trim() === "") return;
+    addMessage(input.value);
+    input.value = "";
+}
+
+function sendRobuxMessage() {
+    addMessage("You received 4,000 Robux!", true);
+}
+
+function sendRandom() {
+    const texts = [
+        "Hello!",
+        "Testing the panel!",
+        "This looks real!",
+        "Cool fake Discord!",
+        "Nice interface!"
+    ];
+    addMessage(texts[Math.floor(Math.random() * texts.length)]);
+}
+
+function clearChat() {
+    messages.innerHTML = "";
+}
+</script>
+
+</body>
+</html>
