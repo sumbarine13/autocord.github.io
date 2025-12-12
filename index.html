@@ -409,7 +409,6 @@
             </ul>
           </div>
           
-          <!-- UPDATED LINK: AutoCord Basic 15 Days -->
           <a href="https://www.roblox.com/game-pass/1631655076/AutoCord-Basic-15-Days" target="_blank" class="tier-button" aria-label="Buy Basic 15 Days for 1,000 Robux">
             <i class="fas fa-shopping-cart"></i> BUY NOW
           </a>
@@ -442,7 +441,6 @@
             </ul>
           </div>
           
-          <!-- UPDATED LINK: AutoCord Basic 30 Days -->
           <a href="https://www.roblox.com/game-pass/1632137023/AutoCord-Basic-30-Days" target="_blank" class="tier-button" aria-label="Buy Basic 30 Days for 1,700 Robux">
             <i class="fas fa-shopping-cart"></i> BUY NOW
           </a>
@@ -471,7 +469,6 @@
             </ul>
           </div>
           
-          <!-- UPDATED LINK: AutoCord Pro 15 Days -->
           <a href="https://www.roblox.com/game-pass/1632113053/AutoCord-Pro-15-Days" target="_blank" class="tier-button" aria-label="Buy Pro 15 Days for 2,500 Robux">
             <i class="fas fa-crown"></i> BUY PRO
           </a>
@@ -506,7 +503,6 @@
             </ul>
           </div>
           
-          <!-- UPDATED LINK: AutoCord Pro 30 Days -->
           <a href="https://www.roblox.com/game-pass/1630273122/AutoCord-Pro-30-Days" target="_blank" class="tier-button" aria-label="Buy Pro 30 Days for 4,500 Robux">
             <i class="fas fa-crown"></i> BUY PRO
           </a>
@@ -561,7 +557,7 @@
         </div>
       </div>
 
-      <!-- DEMO: bot panel + fake channel (side-by-side) -->
+      <!-- DEMO: bot panel + fake channel (next to panel) -->
       <div class="demo-wrap" id="demoArea">
         <!-- Demo Bot Panel (replica of real panel but simulated) -->
         <div class="demo-panel" id="demoPanel">
@@ -601,4 +597,210 @@
 
             <div style="margin-bottom:10px;">
               <div style="font-size:13px;color:var(--muted);margin-bottom:6px;">📝 LOGS</div>
-              <div id="demoLogs" class="demo-console"></
+              <div id="demoLogs" class="demo-console"></div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:13px;color:var(--muted);">🔑 Demo Token: <span id="demoToken">demo_token_1234</span></div>
+              <div>
+                <button id="demoCopy" class="small" style="background:#7289da;color:white;border-radius:6px;">📋 COPY</button>
+                <button id="openSettings" class="small" style="background:#5865f2;color:white;border-radius:6px;margin-left:8px;">⚙️ SETTINGS</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fake Channel (next to panel) -->
+        <div class="demo-channel" id="fakeChannel">
+          <div style="color:var(--accent-2); font-weight:800; margin-bottom:10px;"># demo-channel</div>
+          <div id="fakeMessages">
+            <!-- messages will be injected here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA / Pricing -->
+    <div class="cta-banner reveal" style="margin-top:18px" id="pricing">
+      <div class="left">
+        <h3 style="margin:0">Ready to automate your Discord?</h3>
+        <p style="margin:6px 0 0">Choose from 4 plans starting at 1,000 Robux.</p>
+      </div>
+
+      <div class="right">
+        <a href="#pricing-tiers" class="btn btn-primary" aria-label="View Pricing Plans">
+          <i class="fas fa-tags"></i> VIEW ALL PLANS
+        </a>
+      </div>
+    </div>
+
+    <footer class="site">
+      <div>&copy; 2025 AutoCord Pro. All rights reserved.</div>
+      <div>Made with ❤️ for Roblox communities</div>
+    </footer>
+  </div>
+
+  <!-- Demo JS (safe simulation only) -->
+  <script>
+    (function(){
+      // Demo state
+      let sendTimer = null;
+      let deleteTimer = null;
+      let demoCount = 0;
+      const logsEl = document.getElementById('demoLogs');
+      const fakeMessagesEl = document.getElementById('fakeMessages');
+
+      // helpers
+      function addLog(type, text){
+        const colors = { success: '#43b581', error: '#f04747', info: '#7289da', warning:'#faa61a' };
+        const d = new Date();
+        const time = d.toLocaleTimeString();
+        const el = document.createElement('div');
+        el.style.color = colors[type] || '#b9bbbe';
+        el.style.fontSize = '12px';
+        el.style.padding = '4px 0';
+        el.textContent = `[${time}] ${text}`;
+        logsEl.prepend(el);
+      }
+
+      function addFakeMessage(text){
+        const msgWrap = document.createElement('div');
+        msgWrap.className = 'fake-msg';
+        const author = document.createElement('div');
+        author.className = 'author';
+        author.textContent = 'You';
+        author.style.color = '#43b581';
+        author.style.fontWeight = '700';
+        const body = document.createElement('div');
+        body.textContent = text;
+        msgWrap.appendChild(author);
+        msgWrap.appendChild(body);
+        fakeMessagesEl.appendChild(msgWrap);
+        // auto-scroll
+        fakeMessagesEl.scrollTop = fakeMessagesEl.scrollHeight;
+      }
+
+      function clearFakeMessages(){
+        fakeMessagesEl.innerHTML = '';
+      }
+
+      // DOM refs
+      const btnStart = document.getElementById('demoStart');
+      const btnStop = document.getElementById('demoStop');
+      const btnSend = document.getElementById('demoSend');
+      const btnDel  = document.getElementById('demoDelete');
+      const inputMsg = document.getElementById('demoMessageInput');
+      const inputSI = document.getElementById('demoSendInterval');
+      const inputDI = document.getElementById('demoDelInterval');
+      const btnCopy = document.getElementById('demoCopy');
+      const btnMin = document.getElementById('demoMinBtn');
+      const panelContent = document.querySelector('#demoPanel .panel-content');
+      const btnSettings = document.getElementById('openSettings');
+
+      // Start simulation: send immediately and schedule repeated sends/deletes
+      function startDemo(){
+        if(sendTimer) { addLog('warning','Demo already running'); return; }
+        addLog('info','Starting demo bot');
+        // single send now
+        doSend();
+        // set timers
+        sendTimer = setInterval(doSend, Math.max(1000, (parseInt(inputSI.value)||5) * 1000));
+        deleteTimer = setInterval(doDelete, Math.max(1000, (parseInt(inputDI.value)||12) * 1000));
+        updateStatusUI(true);
+      }
+
+      function stopDemo(){
+        if(!sendTimer){ addLog('warning','Demo not running'); return; }
+        clearInterval(sendTimer); clearInterval(deleteTimer); sendTimer=null; deleteTimer=null;
+        addLog('warning','Demo stopped');
+        updateStatusUI(false);
+      }
+
+      function doSend(){
+        demoCount++;
+        const text = inputMsg.value || `Demo message #${demoCount}`;
+        addLog('success', `Sent: ${text}`);
+        addFakeMessage(text);
+      }
+
+      function doDelete(){
+        if(demoCount === 0){
+          addLog('warning', 'No demo messages to delete');
+          return;
+        }
+        addLog('success', `Deleted ${demoCount} demo messages`);
+        demoCount = 0;
+        clearFakeMessages();
+      }
+
+      function updateStatusUI(running){
+        // Update small visual cue in header if needed (kept simple)
+        // (In a full integration you could show counts etc.)
+      }
+
+      // Button wiring
+      btnStart.addEventListener('click', startDemo);
+      btnStop.addEventListener('click', stopDemo);
+      btnSend.addEventListener('click', doSend);
+      btnDel.addEventListener('click', doDelete);
+      btnCopy.addEventListener('click', function(){
+        const demoToken = document.getElementById('demoToken').textContent;
+        navigator.clipboard?.writeText(demoToken).then(()=> {
+          alert('✅ Demo token copied: ' + demoToken);
+        }).catch(()=> {
+          alert('Demo token: ' + demoToken);
+        });
+      });
+
+      btnMin.addEventListener('click', function(){
+        if(panelContent.style.display === 'none'){
+          panelContent.style.display = 'block';
+          this.textContent = 'MINIMIZE';
+        } else {
+          panelContent.style.display = 'none';
+          this.textContent = 'EXPAND';
+        }
+      });
+
+      // Settings quick dialog (safe, client-only)
+      btnSettings.addEventListener('click', function(){
+        const newMsg = prompt('Default demo message:', inputMsg.value);
+        if(newMsg !== null) inputMsg.value = newMsg;
+        const newSI = prompt('Send interval in seconds:', inputSI.value);
+        if(newSI !== null) inputSI.value = Math.max(1, parseInt(newSI)||5);
+        const newDI = prompt('Delete interval in seconds:', inputDI.value);
+        if(newDI !== null) inputDI.value = Math.max(1, parseInt(newDI)||12);
+        addLog('info', 'Settings updated (demo only)');
+        // if demo is running, restart timers to apply new intervals
+        if(sendTimer){
+          clearInterval(sendTimer); clearInterval(deleteTimer);
+          sendTimer = setInterval(doSend, Math.max(1000, (parseInt(inputSI.value)||5) * 1000));
+          deleteTimer = setInterval(doDelete, Math.max(1000, (parseInt(inputDI.value)||12) * 1000));
+        }
+      });
+
+      // FIXED: Live Demo button in hero opens demo area (scrolls)
+      document.getElementById('demoBtn').addEventListener('click', function(){
+        document.getElementById('demoArea').scrollIntoView({behavior:'smooth', block:'center'});
+        addLog('info','Opened demo area');
+      });
+
+      // FIXED: View Plans button scrolls to pricing section
+      document.querySelectorAll('a[href="#pricing-tiers"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('pricing-tiers').scrollIntoView({behavior:'smooth', block:'start'});
+        });
+      });
+
+      // reveal animation for features
+      document.querySelectorAll('.reveal').forEach((el, i) => {
+        setTimeout(()=> el.classList.add('visible'), 100 + i * 80);
+      });
+
+      // initial log
+      addLog('info','Demo ready — this is a safe simulation (no tokens are accessed).');
+    })();
+  </script>
+</body>
+</html>
